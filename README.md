@@ -117,7 +117,7 @@ Desarrollar una experiencia de comercio electrónico que integre diseño de inte
 
 ## 👨‍💻 Autores
 
-**Darwing Yailang Bohórquez Jaimes**
-**Laura Sofia Mantilla Hernandez**
-**Jenny Carolina Perez Montañez**
+-**Darwing Yailang Bohórquez Jaimes**
+-**Laura Sofia Mantilla Hernandez**
+-**Jenny Carolina Perez Montañez**
 
