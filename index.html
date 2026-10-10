@@ -1,0 +1,263 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>DeskNova — Tecnología que inspira</title>
+  <link rel="stylesheet" href="styles.css" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet" />
+</head>
+<body>
+  <!-- NAVBAR GLOBAL -->
+  <nav id="navbar" class="navbar hidden" aria-label="Navegación principal">
+    <button class="nav-brand" data-view="landing" aria-label="DeskNova inicio">
+      <span class="brand-mark">D</span><span class="brand-text">Desk<strong>Nova</strong></span>
+    </button>
+    <div class="nav-links">
+      <button class="nav-link" data-view="catalog">Tienda</button>
+    </div>
+    <div class="nav-actions">
+      <button id="cart-btn" class="cart-btn" data-view="cart" aria-label="Abrir carrito">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="9" cy="21" r="1"/><circle cx="20" cy="21" r="1"/><path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"/></svg>
+        <span id="cart-count" class="cart-count">0</span>
+      </button>
+      <button class="nav-login btn-outline" data-view="login">Iniciar sesión</button>
+      <div class="user-menu hidden" id="user-menu">
+        <button class="avatar" id="user-avatar" aria-label="Menú de usuario">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="8" r="4"/><path d="M4 21v-2a8 8 0 0 1 16 0v2"/></svg>
+        </button>
+        <div class="dropdown-menu">
+          <p id="user-email-display" class="dropdown-email"></p>
+          <button id="logout-btn" class="dropdown-item logout">Cerrar sesión</button>
+        </div>
+      </div>
+    </div>
+  </nav>
+
+  <!-- CONTENEDOR DE VISTAS SPA -->
+  <main id="app-views" aria-live="polite">
+
+    <!-- 1. VISTA: LANDING -->
+    <section id="view-landing" class="view landing-view">
+      <header class="landing-header">
+        <a class="landing-brand" href="#landing" data-view="landing"><span class="brand-mark">D</span><span>Desk<strong>Nova</strong></span></a>
+        <nav class="landing-nav">
+          <button class="btn-outline" data-view="login">Iniciar sesión</button>
+          <button class="text-link" data-view="cart">Carrito <span class="landing-cart-count" data-cart-count>0</span></button>
+        </nav>
+      </header>
+      <main>
+        <section class="hero-section">
+          <div class="hero-content">
+            <div class="hero-badge"><span class="badge-spark">✦</span> Nueva colección 2026</div>
+            <p class="eyebrow">TECNOLOGÍA PARA TU ESPACIO</p>
+            <h1 class="hero-title">Tecnología que<br><span class="gradient-text">transforma</span><br>tu espacio</h1>
+            <p class="hero-subtitle">Accesorios para un escritorio que acompaña tus mejores ideas. Encuentra herramientas hechas para crear, pensar y producir.</p>
+            <div class="hero-cta">
+              <button class="btn-primary" data-view="catalog">Explorar tienda <span aria-hidden="true">→</span></button>
+              <button class="btn-outline" data-scroll="features">Ver categorías</button>
+            </div>
+            <div class="hero-stats">
+              <div><strong>+2.400</strong><span>Clientes felices</span></div><i></i>
+              <div><strong>4.9 <b>★</b></strong><span>Calificación</span></div><i></i>
+              <div><strong>48h</strong><span>Envío express</span></div>
+            </div>
+          </div>
+          <div class="hero-visual" aria-label="Setup de escritorio DeskNova">
+            <div class="hero-card-float card-1"><img class="float-thumb" src="https://images.unsplash.com/photo-1587829741301-dc798b83add3?auto=format&fit=crop&w=160&h=160&q=80" alt=""/><span class="float-text"><strong>Teclado Mecánico Pro</strong><small>$189.99</small></span></div>
+            <div class="hero-card-float card-2"><img class="float-thumb" src="https://images.unsplash.com/photo-1527814050087-3793815479db?auto=format&fit=crop&w=160&h=160&q=80" alt=""/><span class="float-text"><strong>Mouse Ergonómico</strong><small>$79.99</small></span></div>
+            <div class="hero-main-visual">
+              <img class="hero-main-image" src="https://images.unsplash.com/photo-1498050108023-c5249f4df085?auto=format&fit=crop&w=1400&q=90" alt="Setup de escritorio" fetchpriority="high"/>
+            </div>
+            <div class="hero-card-float card-3"><img class="float-thumb" src="https://images.unsplash.com/photo-1505740420928-5e560c06d30e?auto=format&fit=crop&w=160&h=160&q=80" alt=""/><span class="float-text"><strong>Headset Pro</strong><small>$129.99</small></span></div>
+          </div>
+        </section>
+        <section class="features-section" id="features">
+          <div class="section-header">
+            <div><p class="eyebrow">ELIGE TU SIGUIENTE MEJORA</p><h2>Categorías destacadas</h2></div>
+            <button class="text-link" data-view="catalog">Ver toda la tienda →</button>
+          </div>
+          <div class="features-grid">
+            <button class="feature-card" data-view="catalog"><span class="feature-icon">⌨</span><h3>Teclados</h3><p>Mecánicos, silenciosos y listos para largas jornadas.</p><span class="feature-link">Explorar →</span></button>
+            <button class="feature-card" data-view="catalog"><span class="feature-icon">◉</span><h3>Ratones</h3><p>Ergonomía y precisión para cada movimiento.</p><span class="feature-link">Explorar →</span></button>
+            <button class="feature-card" data-view="catalog"><span class="feature-icon">♫</span><h3>Audio</h3><p>Concentración y claridad en cada llamada.</p><span class="feature-link">Explorar →</span></button>
+            <button class="feature-card" data-view="catalog"><span class="feature-icon">✳</span><h3>Iluminación</h3><p>Una luz mejor pensada para tu espacio.</p><span class="feature-link">Explorar →</span></button>
+            <button class="feature-card" data-view="catalog"><span class="feature-icon">▣</span><h3>Monitores</h3><p>Más detalle, más espacio para tus ideas.</p><span class="feature-link">Explorar →</span></button>
+            <button class="feature-card" data-view="catalog"><span class="feature-icon">⌑</span><h3>Accesorios</h3><p>Los detalles que completan tu setup.</p><span class="feature-link">Explorar →</span></button>
+          </div>
+        </section>
+        <footer class="landing-footer"><span>Desk<strong>Nova</strong> · © 2026</span><span>Tecnología que inspira.</span></footer>
+      </main>
+    </section>
+
+    <!-- 2. VISTA: CATÁLOGO -->
+    <section id="view-catalog" class="view hidden">
+      <div class="catalog-layout">
+        <aside class="catalog-sidebar">
+          <div class="sidebar-section">
+            <h3 class="sidebar-title">Categorías</h3>
+            <ul class="filter-list" id="category-filters">
+              <li class="filter-item active" data-category="all"><span class="filter-dot"></span>Todos los productos</li>
+              <li class="filter-item" data-category="teclados"><span class="filter-dot"></span>Teclados</li>
+              <li class="filter-item" data-category="ratones"><span class="filter-dot"></span>Ratones</li>
+              <li class="filter-item" data-category="audio"><span class="filter-dot"></span>Audio</li>
+              <li class="filter-item" data-category="iluminacion"><span class="filter-dot"></span>Iluminación</li>
+              <li class="filter-item" data-category="monitores"><span class="filter-dot"></span>Monitores</li>
+              <li class="filter-item" data-category="accesorios"><span class="filter-dot"></span>Accesorios</li>
+            </ul>
+          </div>
+          <div class="sidebar-section">
+            <h3 class="sidebar-title">Precio</h3>
+            <div class="price-range">
+              <div class="price-inputs">
+                <input type="number" id="price-min" placeholder="Min" min="0" aria-label="Precio mínimo"/><span>—</span>
+                <input type="number" id="price-max" placeholder="Max" min="0" aria-label="Precio máximo"/>
+              </div>
+              <button class="btn-filter" id="apply-price-filter">Aplicar</button>
+            </div>
+          </div>
+          <div class="sidebar-section">
+            <h3 class="sidebar-title">Ordenar por</h3>
+            <select class="sort-select" id="sort-select">
+              <option value="default">Por defecto</option>
+              <option value="price-asc">Precio: menor a mayor</option>
+              <option value="price-desc">Precio: mayor a menor</option>
+              <option value="name-asc">Nombre A-Z</option>
+              <option value="rating">Mejor calificados</option>
+            </select>
+          </div>
+        </aside>
+        <main class="catalog-main">
+          <div class="catalog-topbar">
+            <div class="catalog-title-group">
+              <p class="eyebrow">DESKNOVA / CATÁLOGO</p>
+              <h1 class="catalog-title">Tienda</h1>
+              <span id="products-count" class="products-badge">15 productos</span>
+            </div>
+            <div class="search-wrapper">
+              <span class="search-icon" aria-hidden="true">⌕</span>
+              <input type="search" id="search-input" class="search-input" placeholder="Buscar productos..."/>
+              <button class="clear-search hidden" id="clear-search" aria-label="Limpiar búsqueda">×</button>
+            </div>
+            <button class="mobile-filter-toggle" id="mobile-filter-toggle">☷ Filtros</button>
+          </div>
+          <div class="products-grid" id="products-grid"></div>
+          <div class="empty-state hidden" id="empty-state">
+            <div class="empty-icon">⌕</div>
+            <h3>Sin resultados</h3>
+            <p>No encontramos productos con esos filtros.</p>
+            <button class="btn-outline" id="reset-filters">Limpiar filtros</button>
+          </div>
+        </main>
+      </div>
+    </section>
+
+    <!-- 3. VISTA: CARRITO -->
+    <section id="view-cart" class="view hidden">
+      <div class="cart-layout">
+        <div class="cart-items-section">
+          <div class="cart-header">
+            <div><p class="eyebrow">DESKNOVA / TU PEDIDO</p><h1 class="cart-title">Mi carrito</h1></div>
+            <button id="clear-cart-btn" class="clear-cart-btn">Vaciar carrito</button>
+          </div>
+          <div class="shipping-progress-wrapper" id="shipping-progress-wrapper">
+            <div class="shipping-progress-header"><span id="shipping-message" class="shipping-message"></span><span id="shipping-percent" class="shipping-percent"></span></div>
+            <div class="shipping-progress-bar"><div class="shipping-progress-fill" id="shipping-progress-fill"></div></div>
+          </div>
+          <div id="cart-items-list" class="cart-items-list"></div>
+          <div class="cart-empty hidden" id="cart-empty">
+            <div class="cart-empty-icon">□</div>
+            <h3>Tu carrito está vacío</h3>
+            <p>Explora la tienda y encuentra tu próxima mejora.</p>
+            <button class="btn-primary" data-view="catalog">Ir a la tienda <span aria-hidden="true">→</span></button>
+          </div>
+          <div id="cart-content-wrapper"><button class="btn-ghost back-to-shop" data-view="catalog">← Seguir comprando</button></div>
+        </div>
+        <aside class="cart-summary" id="cart-summary">
+          <p class="eyebrow">RESUMEN</p><h2 class="summary-title">Tu pedido</h2>
+          <div class="summary-lines">
+            <div class="summary-line"><span>Subtotal</span><span id="summary-subtotal">$0.00</span></div>
+            <div class="summary-line" id="summary-shipping-line"><span>Envío</span><span id="summary-shipping">$15.00</span></div>
+            <div class="summary-line discount hidden" id="summary-free-shipping-line"><span>Envío gratis aplicado</span><span class="discount-amount">-$15.00</span></div>
+          </div>
+          <div class="summary-divider"></div>
+          <div class="summary-total"><span>Total</span><span id="summary-total">$0.00</span></div>
+          <button class="btn-primary full-width checkout-btn" id="checkout-btn">Proceder al pago <span aria-hidden="true">→</span></button>
+          <div class="secure-badge">◇ Pago seguro y protegido</div>
+          <div class="payment-methods"><span>Aceptamos</span><div class="payment-icons"><div class="pay-icon">VISA</div><div class="pay-icon">MC</div><div class="pay-icon">AMEX</div><div class="pay-icon">PayPal</div></div></div>
+        </aside>
+      </div>
+    </section>
+
+    <!-- 4. VISTA: LOGIN -->
+    <section id="view-login" class="view hidden">
+      <div class="auth-layout">
+        <aside class="auth-visual">
+          <div class="auth-visual-content">
+            <a class="auth-brand" href="#landing" data-view="landing"><span class="brand-mark">D</span> Desk<strong>Nova</strong></a>
+            <p class="eyebrow">TU ESPACIO, A TU MANERA</p>
+            <h2>Todo listo para volver a crear.</h2>
+            <p>Accede a tu cuenta para continuar con tu compra y llevar tu setup al siguiente nivel.</p>
+            <div class="auth-features">
+              <div class="auth-feature"><span>↗</span> Envío express en 48h</div>
+              <div class="auth-feature"><span>◇</span> Garantía de 2 años</div>
+              <div class="auth-feature"><span>✳</span> Envío gratis desde $150</div>
+            </div>
+          </div>
+        </aside>
+        <div class="auth-form-container">
+          <div class="auth-form-inner">
+            <button class="back-btn" data-view="catalog"><span aria-hidden="true">←</span> Volver a la tienda</button>
+            <div class="form-header"><p class="eyebrow">BIENVENIDO DE VUELTA</p><h1>Inicia sesión</h1><p>Ingresa tus credenciales para continuar.</p></div>
+            <form id="login-form" class="login-form" novalidate>
+              <div class="form-group"><label for="email">Correo electrónico</label><div class="input-wrapper"><input type="email" id="email" name="email" placeholder="demo@desknova.com" autocomplete="email" /></div><span class="field-error" id="email-error"></span></div>
+              <div class="form-group"><label for="password">Contraseña</label><div class="input-wrapper"><input type="password" id="password" name="password" placeholder="Tu contraseña" autocomplete="current-password" /><button type="button" class="toggle-password" id="toggle-pwd" aria-label="Mostrar contraseña"><svg id="eye-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg></button></div><span class="field-error" id="password-error"></span></div>
+              <div id="login-error" class="login-error hidden"><span aria-hidden="true">!</span><span id="login-error-msg">Credenciales incorrectas</span></div>
+              <button type="submit" class="btn-primary full-width" id="login-submit"><span class="btn-text">Iniciar sesión <span aria-hidden="true">→</span></span><span class="btn-loader hidden"></span></button>
+            </form>
+            <div class="demo-hint"><strong>Cuenta demo</strong><span>demo@desknova.com / demo</span></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- DOCK FLOTANTE DE COMPARACIÓN -->
+  <aside id="compare-dock" class="compare-dock hidden" aria-live="polite">
+    <div class="compare-dock-copy"><span class="compare-dock-icon" aria-hidden="true">⇆</span><div><strong id="compare-count">0 productos seleccionados</strong><span id="compare-hint">Selecciona al menos 2 para compararlos</span></div></div>
+    <div class="compare-dock-actions"><button class="compare-clear" id="compare-clear">Limpiar</button><button class="compare-open" id="compare-open" disabled>Ver comparación <span aria-hidden="true">→</span></button></div>
+  </aside>
+
+  <!-- TOAST NOTIFICATIONS -->
+  <div id="toast" class="toast hidden" role="status" aria-live="polite"><span id="toast-icon" class="toast-icon"></span><span id="toast-message" class="toast-message"></span></div>
+
+  <!-- MODAL: COMPARACIÓN -->
+  <div id="compare-modal" class="modal-overlay compare-overlay hidden" role="dialog" aria-modal="true" aria-labelledby="compare-title">
+    <section class="compare-modal-card">
+      <header class="compare-modal-header"><div><p class="eyebrow">DESKNOVA / COMPARATIVA</p><h2 id="compare-title">Encuentra tu mejor opción</h2></div><button class="compare-close" id="compare-close" aria-label="Cerrar comparación">×</button></header>
+      <div class="compare-table-wrap"><table class="compare-table"><thead id="compare-table-head"></thead><tbody id="compare-table-body"></tbody></table></div>
+      <footer class="compare-modal-footer"><span>Comparación de precio, categoría y valoración</span><button class="btn-outline" id="compare-done">Volver a la tienda</button></footer>
+    </section>
+  </div>
+
+  <!-- MODAL: CHECKOUT -->
+  <div id="checkout-modal" class="modal-overlay hidden" role="dialog" aria-modal="true" aria-labelledby="checkout-title">
+    <div class="modal-card">
+      <div class="modal-icon success">✓</div>
+      <p id="checkout-step-label" class="eyebrow">CHECKOUT</p>
+      <h2 id="checkout-title">Revisa tu pedido</h2>
+      <p id="checkout-description"></p>
+      <div class="checkout-modal-actions" id="checkout-actions">
+        <button class="btn-outline" id="checkout-cancel">Volver al carrito</button>
+        <button class="btn-primary" id="confirm-order">Confirmar pedido</button>
+      </div>
+      <button class="btn-primary hidden" id="modal-close">Continuar comprando</button>
+    </div>
+  </div>
+
+  <script src="app.js" defer></script>
+</body>
+</html>
