@@ -44,6 +44,7 @@
       <header class="landing-header">
         <a class="landing-brand" href="#landing" data-view="landing"><span class="brand-mark">D</span><span>Desk<strong>Nova</strong></span></a>
         <nav class="landing-nav">
+          <button class="text-link" data-view="catalog">Catálogo</button>
           <button class="btn-outline" data-view="login">Iniciar sesión</button>
           <button class="text-link" data-view="cart">Carrito <span class="landing-cart-count" data-cart-count>0</span></button>
         </nav>
@@ -56,7 +57,7 @@
             <h1 class="hero-title">Tecnología que<br><span class="gradient-text">transforma</span><br>tu espacio</h1>
             <p class="hero-subtitle">Accesorios para un escritorio que acompaña tus mejores ideas. Encuentra herramientas hechas para crear, pensar y producir.</p>
             <div class="hero-cta">
-              <button class="btn-primary" data-view="catalog">Explorar tienda <span aria-hidden="true">→</span></button>
+              <button class="btn-primary" data-view="catalog">Explorar catálogo <span aria-hidden="true">→</span></button>
               <button class="btn-outline" data-scroll="features">Ver categorías</button>
             </div>
             <div class="hero-stats">
@@ -80,12 +81,12 @@
             <button class="text-link" data-view="catalog">Ver toda la tienda →</button>
           </div>
           <div class="features-grid">
-            <button class="feature-card" data-view="catalog"><span class="feature-icon">⌨</span><h3>Teclados</h3><p>Mecánicos, silenciosos y listos para largas jornadas.</p><span class="feature-link">Explorar →</span></button>
-            <button class="feature-card" data-view="catalog"><span class="feature-icon">◉</span><h3>Ratones</h3><p>Ergonomía y precisión para cada movimiento.</p><span class="feature-link">Explorar →</span></button>
-            <button class="feature-card" data-view="catalog"><span class="feature-icon">♫</span><h3>Audio</h3><p>Concentración y claridad en cada llamada.</p><span class="feature-link">Explorar →</span></button>
-            <button class="feature-card" data-view="catalog"><span class="feature-icon">✳</span><h3>Iluminación</h3><p>Una luz mejor pensada para tu espacio.</p><span class="feature-link">Explorar →</span></button>
-            <button class="feature-card" data-view="catalog"><span class="feature-icon">▣</span><h3>Monitores</h3><p>Más detalle, más espacio para tus ideas.</p><span class="feature-link">Explorar →</span></button>
-            <button class="feature-card" data-view="catalog"><span class="feature-icon">⌑</span><h3>Accesorios</h3><p>Los detalles que completan tu setup.</p><span class="feature-link">Explorar →</span></button>
+            <button class="feature-card" data-view="catalog" data-category="teclados"><span class="feature-icon">⌨</span><h3>Teclados</h3><p>Mecánicos, silenciosos y listos para largas jornadas.</p><span class="feature-link">Explorar →</span></button>
+            <button class="feature-card" data-view="catalog" data-category="ratones"><span class="feature-icon">◉</span><h3>Ratones</h3><p>Ergonomía y precisión para cada movimiento.</p><span class="feature-link">Explorar →</span></button>
+            <button class="feature-card" data-view="catalog" data-category="audio"><span class="feature-icon">♫</span><h3>Audio</h3><p>Concentración y claridad en cada llamada.</p><span class="feature-link">Explorar →</span></button>
+            <button class="feature-card" data-view="catalog" data-category="iluminacion"><span class="feature-icon">✳</span><h3>Iluminación</h3><p>Una luz mejor pensada para tu espacio.</p><span class="feature-link">Explorar →</span></button>
+            <button class="feature-card" data-view="catalog" data-category="monitores"><span class="feature-icon">▣</span><h3>Monitores</h3><p>Más detalle, más espacio para tus ideas.</p><span class="feature-link">Explorar →</span></button>
+            <button class="feature-card" data-view="catalog" data-category="accesorios"><span class="feature-icon">⌑</span><h3>Accesorios</h3><p>Los detalles que completan tu setup.</p><span class="feature-link">Explorar →</span></button>
           </div>
         </section>
         <footer class="landing-footer"><span>Desk<strong>Nova</strong> · © 2026</span><span>Tecnología que inspira.</span></footer>
@@ -119,6 +120,22 @@
             </div>
           </div>
           <div class="sidebar-section">
+            <h3 class="sidebar-title">Marca</h3>
+            <div class="check-list" id="brand-filters"></div>
+          </div>
+          <div class="sidebar-section">
+            <h3 class="sidebar-title">Tipo de conexión</h3>
+            <div class="check-list" id="connection-filters"></div>
+          </div>
+          <div class="sidebar-section">
+            <h3 class="sidebar-title">Disponibilidad</h3>
+            <div class="check-list" id="availability-filters">
+              <label class="check-item"><input type="radio" name="availability" value="all" checked /> Todos</label>
+              <label class="check-item"><input type="radio" name="availability" value="available" /> Disponibles</label>
+              <label class="check-item"><input type="radio" name="availability" value="soldout" /> Agotados</label>
+            </div>
+          </div>
+          <div class="sidebar-section">
             <h3 class="sidebar-title">Ordenar por</h3>
             <select class="sort-select" id="sort-select">
               <option value="default">Por defecto</option>
@@ -128,6 +145,7 @@
               <option value="rating">Mejor calificados</option>
             </select>
           </div>
+          <button class="btn-filter btn-reset" id="sidebar-reset-filters">Limpiar filtros</button>
         </aside>
         <main class="catalog-main">
           <div class="catalog-topbar">
@@ -163,8 +181,7 @@
             <button id="clear-cart-btn" class="clear-cart-btn">Vaciar carrito</button>
           </div>
           <div class="shipping-progress-wrapper" id="shipping-progress-wrapper">
-            <div class="shipping-progress-header"><span id="shipping-message" class="shipping-message"></span><span id="shipping-percent" class="shipping-percent"></span></div>
-            <div class="shipping-progress-bar"><div class="shipping-progress-fill" id="shipping-progress-fill"></div></div>
+            <span class="shipping-message">🚚 Elige <strong>envío a domicilio</strong> o <strong>recogida en tienda</strong> al pagar. Ninguna de las dos tiene costo adicional.</span>
           </div>
           <div id="cart-items-list" class="cart-items-list"></div>
           <div class="cart-empty hidden" id="cart-empty">
@@ -179,13 +196,13 @@
           <p class="eyebrow">RESUMEN</p><h2 class="summary-title">Tu pedido</h2>
           <div class="summary-lines">
             <div class="summary-line"><span>Subtotal</span><span id="summary-subtotal">$0.00</span></div>
-            <div class="summary-line" id="summary-shipping-line"><span>Envío</span><span id="summary-shipping">$15.00</span></div>
-            <div class="summary-line discount hidden" id="summary-free-shipping-line"><span>Envío gratis aplicado</span><span class="discount-amount">-$15.00</span></div>
+            <div class="summary-line discount"><span>Entrega</span><span>Sin costo adicional</span></div>
           </div>
           <div class="summary-divider"></div>
           <div class="summary-total"><span>Total</span><span id="summary-total">$0.00</span></div>
           <button class="btn-primary full-width checkout-btn" id="checkout-btn">Proceder al pago <span aria-hidden="true">→</span></button>
-          <div class="secure-badge">◇ Pago seguro y protegido</div>
+          <p class="checkout-empty-msg hidden" id="checkout-empty-msg">Agregue al menos un producto al carrito para continuar.</p>
+          <div class="secure-badge">◇ Compra simulada: no se realizan cobros reales</div>
           <div class="payment-methods"><span>Aceptamos</span><div class="payment-icons"><div class="pay-icon">VISA</div><div class="pay-icon">MC</div><div class="pay-icon">AMEX</div><div class="pay-icon">PayPal</div></div></div>
         </aside>
       </div>
@@ -203,7 +220,7 @@
             <div class="auth-features">
               <div class="auth-feature"><span>↗</span> Envío express en 48h</div>
               <div class="auth-feature"><span>◇</span> Garantía de 2 años</div>
-              <div class="auth-feature"><span>✳</span> Envío gratis desde $150</div>
+              <div class="auth-feature"><span>✳</span> Entrega sin costo adicional</div>
             </div>
           </div>
         </aside>
@@ -228,7 +245,7 @@
   <!-- DOCK FLOTANTE DE COMPARACIÓN -->
   <aside id="compare-dock" class="compare-dock hidden" aria-live="polite">
     <div class="compare-dock-copy"><span class="compare-dock-icon" aria-hidden="true">⇆</span><div><strong id="compare-count">0 productos seleccionados</strong><span id="compare-hint">Selecciona al menos 2 para compararlos</span></div></div>
-    <div class="compare-dock-actions"><button class="compare-clear" id="compare-clear">Limpiar</button><button class="compare-open" id="compare-open" disabled>Ver comparación <span aria-hidden="true">→</span></button></div>
+    <div class="compare-dock-actions"><button class="compare-clear" id="compare-clear">Limpiar</button><button class="compare-open" id="compare-open">Ver comparación <span aria-hidden="true">→</span></button></div>
   </aside>
 
   <!-- TOAST NOTIFICATIONS -->
@@ -239,23 +256,82 @@
     <section class="compare-modal-card">
       <header class="compare-modal-header"><div><p class="eyebrow">DESKNOVA / COMPARATIVA</p><h2 id="compare-title">Encuentra tu mejor opción</h2></div><button class="compare-close" id="compare-close" aria-label="Cerrar comparación">×</button></header>
       <div class="compare-table-wrap"><table class="compare-table"><thead id="compare-table-head"></thead><tbody id="compare-table-body"></tbody></table></div>
-      <footer class="compare-modal-footer"><span>Comparación de precio, categoría y valoración</span><button class="btn-outline" id="compare-done">Volver a la tienda</button></footer>
+      <footer class="compare-modal-footer"><span>Precio, marca, sensor, conexión, disponibilidad y características técnicas</span><button class="btn-outline" id="compare-done">Volver al catálogo</button></footer>
+    </section>
+  </div>
+
+  <!-- MODAL: DETALLE DE PRODUCTO -->
+  <div id="product-modal" class="modal-overlay hidden" role="dialog" aria-modal="true" aria-labelledby="product-modal-title">
+    <section class="compare-modal-card product-modal-card">
+      <header class="compare-modal-header"><div><p class="eyebrow" id="product-modal-category">DESKNOVA / PRODUCTO</p><h2 id="product-modal-title">Producto</h2></div><button class="compare-close" id="product-modal-close" aria-label="Cerrar detalle">×</button></header>
+      <div class="product-detail" id="product-detail-body"></div>
     </section>
   </div>
 
   <!-- MODAL: CHECKOUT -->
   <div id="checkout-modal" class="modal-overlay hidden" role="dialog" aria-modal="true" aria-labelledby="checkout-title">
-    <div class="modal-card">
-      <div class="modal-icon success">✓</div>
-      <p id="checkout-step-label" class="eyebrow">CHECKOUT</p>
-      <h2 id="checkout-title">Revisa tu pedido</h2>
-      <p id="checkout-description"></p>
-      <div class="checkout-modal-actions" id="checkout-actions">
-        <button class="btn-outline" id="checkout-cancel">Volver al carrito</button>
-        <button class="btn-primary" id="confirm-order">Confirmar pedido</button>
+    <section class="compare-modal-card checkout-card">
+      <header class="compare-modal-header"><div><p id="checkout-step-label" class="eyebrow">CHECKOUT</p><h2 id="checkout-title">Finaliza tu pedido</h2></div><button class="compare-close" id="checkout-close" aria-label="Cerrar checkout">×</button></header>
+
+      <form id="checkout-form" class="checkout-form" novalidate>
+        <div class="checkout-block">
+          <h3 class="checkout-block-title">1. Resumen del pedido</h3>
+          <ul class="checkout-summary" id="checkout-summary"></ul>
+          <div class="checkout-total"><span>Total a pagar</span><strong id="checkout-total">$0.00</strong></div>
+        </div>
+
+        <div class="checkout-block">
+          <h3 class="checkout-block-title">2. Modalidad de entrega</h3>
+          <div class="option-toggle">
+            <label class="option-card"><input type="radio" name="delivery" value="domicilio" checked /><span><strong>Envío a domicilio</strong><small>Llega en 48h · sin costo adicional</small></span></label>
+            <label class="option-card"><input type="radio" name="delivery" value="tienda" /><span><strong>Recogida en tienda</strong><small>Disponible en 24h · sin costo adicional</small></span></label>
+          </div>
+        </div>
+
+        <div class="checkout-block">
+          <h3 class="checkout-block-title">3. Datos de entrega</h3>
+          <div class="form-grid">
+            <div class="form-group"><label for="co-name">Nombre completo *</label><input class="co-input" id="co-name" type="text" autocomplete="name" placeholder="Ej. Laura Mantilla" /></div>
+            <div class="form-group"><label for="co-phone">Teléfono *</label><input class="co-input" id="co-phone" type="tel" autocomplete="tel" placeholder="Ej. 310 555 1234" /></div>
+            <div class="form-group"><label for="co-email">Correo electrónico *</label><input class="co-input" id="co-email" type="email" autocomplete="email" placeholder="Ej. correo@ejemplo.com" /></div>
+            <div class="form-group" data-delivery="domicilio"><label for="co-city">Ciudad *</label><input class="co-input" id="co-city" type="text" autocomplete="address-level2" placeholder="Ej. Bucaramanga" /></div>
+            <div class="form-group full" data-delivery="domicilio"><label for="co-address">Dirección de entrega *</label><input class="co-input" id="co-address" type="text" autocomplete="street-address" placeholder="Ej. Calle 45 # 27-30, Apto 302" /></div>
+            <div class="form-group full hidden" data-delivery="tienda"><label for="co-store">Tienda para recoger *</label>
+              <select class="co-input sort-select" id="co-store">
+                <option value="">Selecciona una tienda</option>
+                <option value="DeskNova Cabecera — Bucaramanga">DeskNova Cabecera — Bucaramanga</option>
+                <option value="DeskNova Cañaveral — Floridablanca">DeskNova Cañaveral — Floridablanca</option>
+                <option value="DeskNova Centro — Bucaramanga">DeskNova Centro — Bucaramanga</option>
+              </select>
+            </div>
+          </div>
+        </div>
+
+        <div class="checkout-block">
+          <h3 class="checkout-block-title">4. Método de pago <small>(simulado)</small></h3>
+          <div class="option-toggle three">
+            <label class="option-card"><input type="radio" name="payment" value="Tarjeta crédito / débito" /><span><strong>Tarjeta</strong><small>Crédito o débito</small></span></label>
+            <label class="option-card"><input type="radio" name="payment" value="PSE" /><span><strong>PSE</strong><small>Débito bancario</small></span></label>
+            <label class="option-card"><input type="radio" name="payment" value="Pago contra entrega" /><span><strong>Contra entrega</strong><small>Pagas al recibir</small></span></label>
+          </div>
+          <p class="checkout-note">Es una simulación: no se piden datos de tarjeta ni se realizan cobros reales.</p>
+        </div>
+
+        <div class="checkout-error hidden" id="checkout-error" role="alert"></div>
+
+        <div class="checkout-modal-actions">
+          <button type="button" class="btn-outline" id="checkout-cancel">Volver al carrito</button>
+          <button type="submit" class="btn-primary" id="confirm-order">Confirmar pedido</button>
+        </div>
+      </form>
+
+      <div class="checkout-success hidden" id="checkout-success">
+        <div class="modal-icon success">✓</div>
+        <h2>¡Pedido confirmado!</h2>
+        <p id="checkout-success-msg"></p>
+        <button class="btn-primary" id="modal-close">Continuar comprando</button>
       </div>
-      <button class="btn-primary hidden" id="modal-close">Continuar comprando</button>
-    </div>
+    </section>
   </div>
 
   <script src="app.js" defer></script>

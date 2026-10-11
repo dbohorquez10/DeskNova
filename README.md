@@ -8,13 +8,14 @@ El proyecto está desarrollado con tecnologías web estándar: HTML5, CSS3 y Jav
 
 - **Página de inicio:** presentación de la marca, accesos rápidos y categorías destacadas.
 - **Catálogo de productos:** 15 productos con imágenes, descripciones, precios y valoraciones.
-- **Búsqueda y filtros:** búsqueda por nombre, filtrado por categoría y rango de precios.
+- **Búsqueda y filtros:** búsqueda por nombre y filtros combinables por categoría, rango de precios, marca, tipo de conexión y disponibilidad, con botón para limpiar filtros. Las categorías de la página de inicio abren el catálogo ya filtrado.
 - **Ordenamiento:** organización de productos por precio, nombre y valoración.
-- **Comparador de productos:** comparación simultánea de hasta tres productos según su precio, categoría, descripción y valoración.
+- **Detalle de producto:** al seleccionar un producto se muestran nombre, imagen, descripción, precio final, especificaciones técnicas, compatibilidad, disponibilidad y opciones de entrega. Los productos agotados no se pueden agregar al carrito.
+- **Comparador de productos:** comparación de dos o tres productos según precio, categoría, marca, tipo de sensor, tipo de conexión, disponibilidad, características técnicas, compatibilidad y valoración, con la opción "Comprar ahora". Si hay menos de dos productos seleccionados se muestra un mensaje de error.
 - **Carrito de compras:** agregar y eliminar productos, modificar cantidades y consultar el subtotal y el total.
-- **Cálculo de envío:** envío de demostración por $15.00 y envío gratuito para compras desde $150.00.
-- **Inicio y cierre de sesión:** interfaz de autenticación con credenciales de demostración.
-- **Proceso de compra:** resumen del pedido y confirmación visual de la compra.
+- **Entrega sin costo adicional:** el envío a domicilio y la recogida en tienda no modifican el precio final.
+- **Inicio y cierre de sesión (opcional):** interfaz de autenticación con credenciales de demostración. No es obligatoria para comprar.
+- **Proceso de compra simulado:** resumen del pedido, elección entre envío a domicilio o recogida en tienda, datos de entrega, método de pago simulado (tarjeta, PSE o contra entrega), validación de campos obligatorios y confirmación visual con número de pedido.
 - **Diseño adaptable:** interfaz pensada para ofrecer una experiencia cómoda en distintos tamaños de pantalla.
 - **Notificaciones interactivas:** mensajes visuales para informar sobre las acciones realizadas.
 
@@ -79,7 +80,7 @@ No es necesario instalar dependencias ni ejecutar comandos de compilación.
 
 ## 🔑 Acceso de demostración
 
-Para probar la funcionalidad de inicio de sesión, utiliza las siguientes credenciales:
+El inicio de sesión es opcional. Para probarlo, utiliza las siguientes credenciales:
 
 | Campo | Valor |
 |---|---|
@@ -94,9 +95,9 @@ Estas credenciales están destinadas exclusivamente a la demostración de la int
 2. **Buscar productos:** entra en la tienda y utiliza la búsqueda, los filtros y las opciones de ordenamiento.
 3. **Comparar:** selecciona al menos dos productos y abre el comparador para revisar sus características.
 4. **Agregar al carrito:** incorpora productos y ajusta las cantidades según tus necesidades.
-5. **Revisar el pedido:** consulta el subtotal, los gastos de envío y el total calculado.
-6. **Iniciar sesión:** utiliza la cuenta de demostración para acceder al flujo de compra.
-7. **Confirmar:** completa el proceso simulado y observa la confirmación del pedido.
+5. **Revisar el pedido:** consulta el subtotal y el total; la entrega no tiene costo adicional.
+6. **Pagar:** selecciona la modalidad de entrega, completa tus datos y elige un método de pago simulado.
+7. **Confirmar:** confirma el pedido y observa la confirmación con su número; el carrito se vacía automáticamente.
 
 ## ⚙️ Consideraciones técnicas
 
