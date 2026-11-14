@@ -3,261 +3,1142 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>DeskNova — Tecnología que inspira</title>
-  <link rel="stylesheet" href="styles.css" />
+  <title>Desknova — Periféricos de Precisión & Boutique DTC</title>
+  
+  <!-- Google Fonts: Plus Jakarta Sans -->
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet" />
+  
+  <!-- Bootstrap 5.3.3 CSS -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous" />
+  
+  <!-- Bootstrap Icons 1.11.3 -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css" />
+  
+  <!-- Custom Boutique Styles -->
+  <link rel="stylesheet" href="styles.css" />
 </head>
 <body>
-  <!-- NAVBAR GLOBAL -->
-  <nav id="navbar" class="navbar hidden" aria-label="Navegación principal">
-    <button class="nav-brand" data-view="landing" aria-label="DeskNova inicio">
-      <span class="brand-mark">D</span><span class="brand-text">Desk<strong>Nova</strong></span>
-    </button>
-    <div class="nav-links">
-      <button class="nav-link" data-view="catalog">Tienda</button>
-    </div>
-    <div class="nav-actions">
-      <button id="cart-btn" class="cart-btn" data-view="cart" aria-label="Abrir carrito">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="9" cy="21" r="1"/><circle cx="20" cy="21" r="1"/><path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"/></svg>
-        <span id="cart-count" class="cart-count">0</span>
+
+  <!-- BARRA DE ANUNCIOS SUPERIOR -->
+  <aside class="announcement-bar text-center" aria-label="Aviso comercial">
+    <span>DESKNOVA · ENVÍO GRATUITO EN PEDIDOS SUPERIORES A $150 · 30 DÍAS DE PRUEBA EN TU SETUP</span>
+  </aside>
+
+  <!-- NAVBAR MINIMALISTA CON IDENTIDAD DESKNOVA -->
+  <nav class="navbar navbar-expand-lg navbar-light border-bottom sticky-top py-3" aria-label="Navegación principal">
+    <div class="container-fluid px-lg-5">
+      <!-- Identidad Desknova -->
+      <a class="navbar-brand me-4" href="#" onclick="Router.navigate('landing'); return false;">
+        <span class="brand-title">Desk<strong>nova</strong></span>
+      </a>
+
+      <!-- Botón móvil de navegación -->
+      <button class="navbar-toggler border-0 shadow-none p-0" type="button" data-bs-toggle="collapse" data-bs-target="#navbarContent" aria-controls="navbarContent" aria-expanded="false" aria-label="Alternar navegación">
+        <i class="bi bi-list fs-3"></i>
       </button>
-      <button class="nav-login btn-outline" data-view="login">Iniciar sesión</button>
-      <div class="user-menu hidden" id="user-menu">
-        <button class="avatar" id="user-avatar" aria-label="Menú de usuario">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="8" r="4"/><path d="M4 21v-2a8 8 0 0 1 16 0v2"/></svg>
-        </button>
-        <div class="dropdown-menu">
-          <p id="user-email-display" class="dropdown-email"></p>
-          <button id="logout-btn" class="dropdown-item logout">Cerrar sesión</button>
+
+      <!-- Enlaces de Navegación por Vistas Separadas -->
+      <div class="collapse navbar-collapse" id="navbarContent">
+        <ul class="navbar-nav me-auto mb-2 mb-lg-0 gap-lg-2">
+          <li class="nav-item">
+            <a class="nav-link active" id="navLinkLanding" href="#" onclick="Router.navigate('landing'); return false;">Inicio</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" id="navLinkCatalog" href="#" onclick="Router.navigate('catalog', 'all'); return false;">Catálogo Completo</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#" onclick="Router.navigate('catalog', 'teclados'); return false;">Teclados</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#" onclick="Router.navigate('catalog', 'ratones'); return false;">Ratones</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#" onclick="Router.navigate('catalog', 'audio'); return false;">Audio</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#" onclick="Router.navigate('catalog', 'monitores'); return false;">Monitores</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#" onclick="Router.navigate('catalog', 'accesorios'); return false;">Accesorios</a>
+          </li>
+        </ul>
+
+        <!-- Acciones del Navbar (Comparar, Autenticación y Carrito) -->
+        <div class="d-flex align-items-center gap-3">
+          
+          <!-- Botón de Comparación con Badge -->
+          <button class="nav-icon-btn position-relative" id="navCompareBtn" title="Ver comparación técnica" onclick="CompareModule.open();">
+            <i class="bi bi-arrow-left-right fs-5"></i>
+            <span class="cart-badge-pill d-none" id="navCompareCount">0</span>
+          </button>
+
+          <!-- AUTENTICACIÓN EN EL NAVBAR -->
+          <div id="authNavContainer">
+            <!-- Estado 1: No autenticado -->
+            <button class="btn btn-outline-dark btn-sm rounded-0 d-flex align-items-center gap-2 px-3 py-2 text-uppercase fw-bold" style="font-size: 0.74rem; letter-spacing: 0.04em;" data-bs-toggle="modal" data-bs-target="#authModal" id="loginNavBtn">
+              <i class="bi bi-person fs-6"></i>
+              <span>Iniciar Sesión / Registro</span>
+            </button>
+
+            <!-- Estado 2: Autenticado -->
+            <div class="dropdown d-none" id="userMenuDropdown">
+              <button class="btn btn-dark btn-sm rounded-0 dropdown-toggle d-flex align-items-center gap-2 px-3 py-2" type="button" data-bs-toggle="dropdown" aria-expanded="false" id="userMenuBtn">
+                <i class="bi bi-person-check-fill"></i>
+                <span id="navUserName">Mi Cuenta</span>
+              </button>
+              <ul class="dropdown-menu dropdown-menu-end rounded-0 border-light shadow-sm py-2">
+                <li><h6 class="dropdown-header text-uppercase" style="font-size: 0.7rem;" id="navUserEmail">usuario@desknova.com</h6></li>
+                <li><hr class="dropdown-divider"></li>
+                <li><button class="dropdown-item" onclick="Router.navigate('catalog');"><i class="bi bi-grid me-2"></i>Explorar Catálogo</button></li>
+                <li><button class="dropdown-item text-danger" id="logoutBtn"><i class="bi bi-box-arrow-right me-2"></i>Cerrar Sesión</button></li>
+              </ul>
+            </div>
+          </div>
+
+          <!-- Botón de Carrito -->
+          <button class="nav-icon-btn position-relative ms-1" type="button" data-bs-toggle="offcanvas" data-bs-target="#cartOffcanvas" aria-controls="cartOffcanvas" title="Abrir bolsa de compra">
+            <i class="bi bi-bag fs-5"></i>
+            <span class="cart-badge-pill" id="cartNavCount">0</span>
+          </button>
         </div>
       </div>
     </div>
   </nav>
 
-  <!-- CONTENEDOR DE VISTAS SPA -->
-  <main id="app-views" aria-live="polite">
+  <!-- CONTENEDOR DE VISTAS INDEPENDIENTES (SPA) -->
+  <main id="appViewsContainer">
 
-    <!-- 1. VISTA: LANDING -->
-    <section id="view-landing" class="view landing-view">
-      <header class="landing-header">
-        <a class="landing-brand" href="#landing" data-view="landing"><span class="brand-mark">D</span><span>Desk<strong>Nova</strong></span></a>
-        <nav class="landing-nav">
-          <button class="btn-outline" data-view="login">Iniciar sesión</button>
-          <button class="text-link" data-view="cart">Carrito <span class="landing-cart-count" data-cart-count>0</span></button>
-        </nav>
-      </header>
-      <main>
-        <section class="hero-section">
-          <div class="hero-content">
-            <div class="hero-badge"><span class="badge-spark">✦</span> Nueva colección 2026</div>
-            <p class="eyebrow">TECNOLOGÍA PARA TU ESPACIO</p>
-            <h1 class="hero-title">Tecnología que<br><span class="gradient-text">transforma</span><br>tu espacio</h1>
-            <p class="hero-subtitle">Accesorios para un escritorio que acompaña tus mejores ideas. Encuentra herramientas hechas para crear, pensar y producir.</p>
-            <div class="hero-cta">
-              <button class="btn-primary" data-view="catalog">Explorar tienda <span aria-hidden="true">→</span></button>
-              <button class="btn-outline" data-scroll="features">Ver categorías</button>
-            </div>
-            <div class="hero-stats">
-              <div><strong>+2.400</strong><span>Clientes felices</span></div><i></i>
-              <div><strong>4.9 <b>★</b></strong><span>Calificación</span></div><i></i>
-              <div><strong>48h</strong><span>Envío express</span></div>
-            </div>
-          </div>
-          <div class="hero-visual" aria-label="Setup de escritorio DeskNova">
-            <div class="hero-card-float card-1"><img class="float-thumb" src="https://images.unsplash.com/photo-1587829741301-dc798b83add3?auto=format&fit=crop&w=160&h=160&q=80" alt=""/><span class="float-text"><strong>Teclado Mecánico Pro</strong><small>$189.99</small></span></div>
-            <div class="hero-card-float card-2"><img class="float-thumb" src="https://images.unsplash.com/photo-1527814050087-3793815479db?auto=format&fit=crop&w=160&h=160&q=80" alt=""/><span class="float-text"><strong>Mouse Ergonómico</strong><small>$79.99</small></span></div>
-            <div class="hero-main-visual">
-              <img class="hero-main-image" src="https://images.unsplash.com/photo-1498050108023-c5249f4df085?auto=format&fit=crop&w=1400&q=90" alt="Setup de escritorio" fetchpriority="high"/>
-            </div>
-            <div class="hero-card-float card-3"><img class="float-thumb" src="https://images.unsplash.com/photo-1505740420928-5e560c06d30e?auto=format&fit=crop&w=160&h=160&q=80" alt=""/><span class="float-text"><strong>Headset Pro</strong><small>$129.99</small></span></div>
-          </div>
-        </section>
-        <section class="features-section" id="features">
-          <div class="section-header">
-            <div><p class="eyebrow">ELIGE TU SIGUIENTE MEJORA</p><h2>Categorías destacadas</h2></div>
-            <button class="text-link" data-view="catalog">Ver toda la tienda →</button>
-          </div>
-          <div class="features-grid">
-            <button class="feature-card" data-view="catalog"><span class="feature-icon">⌨</span><h3>Teclados</h3><p>Mecánicos, silenciosos y listos para largas jornadas.</p><span class="feature-link">Explorar →</span></button>
-            <button class="feature-card" data-view="catalog"><span class="feature-icon">◉</span><h3>Ratones</h3><p>Ergonomía y precisión para cada movimiento.</p><span class="feature-link">Explorar →</span></button>
-            <button class="feature-card" data-view="catalog"><span class="feature-icon">♫</span><h3>Audio</h3><p>Concentración y claridad en cada llamada.</p><span class="feature-link">Explorar →</span></button>
-            <button class="feature-card" data-view="catalog"><span class="feature-icon">✳</span><h3>Iluminación</h3><p>Una luz mejor pensada para tu espacio.</p><span class="feature-link">Explorar →</span></button>
-            <button class="feature-card" data-view="catalog"><span class="feature-icon">▣</span><h3>Monitores</h3><p>Más detalle, más espacio para tus ideas.</p><span class="feature-link">Explorar →</span></button>
-            <button class="feature-card" data-view="catalog"><span class="feature-icon">⌑</span><h3>Accesorios</h3><p>Los detalles que completan tu setup.</p><span class="feature-link">Explorar →</span></button>
-          </div>
-        </section>
-        <footer class="landing-footer"><span>Desk<strong>Nova</strong> · © 2026</span><span>Tecnología que inspira.</span></footer>
-      </main>
-    </section>
-
-    <!-- 2. VISTA: CATÁLOGO -->
-    <section id="view-catalog" class="view hidden">
-      <div class="catalog-layout">
-        <aside class="catalog-sidebar">
-          <div class="sidebar-section">
-            <h3 class="sidebar-title">Categorías</h3>
-            <ul class="filter-list" id="category-filters">
-              <li class="filter-item active" data-category="all"><span class="filter-dot"></span>Todos los productos</li>
-              <li class="filter-item" data-category="teclados"><span class="filter-dot"></span>Teclados</li>
-              <li class="filter-item" data-category="ratones"><span class="filter-dot"></span>Ratones</li>
-              <li class="filter-item" data-category="audio"><span class="filter-dot"></span>Audio</li>
-              <li class="filter-item" data-category="iluminacion"><span class="filter-dot"></span>Iluminación</li>
-              <li class="filter-item" data-category="monitores"><span class="filter-dot"></span>Monitores</li>
-              <li class="filter-item" data-category="accesorios"><span class="filter-dot"></span>Accesorios</li>
-            </ul>
-          </div>
-          <div class="sidebar-section">
-            <h3 class="sidebar-title">Precio</h3>
-            <div class="price-range">
-              <div class="price-inputs">
-                <input type="number" id="price-min" placeholder="Min" min="0" aria-label="Precio mínimo"/><span>—</span>
-                <input type="number" id="price-max" placeholder="Max" min="0" aria-label="Precio máximo"/>
+    <!-- ═════════════════════════════════════════════════════════════════
+         VISTA 1: LANDING PAGE (INICIO PURO - EXCLUSIVO PARA MARKETING)
+         REGLA ESTRICTA: Sin barras de filtros laterales ni buscadores complejos.
+         ═════════════════════════════════════════════════════════════════ -->
+    <section id="view-landing" class="app-view">
+      
+      <!-- Hero Banner Inmaculado -->
+      <header class="hero-minimal py-5">
+        <div class="container-fluid px-lg-5">
+          <div class="row align-items-center g-5 py-lg-5">
+            <div class="col-lg-6">
+              <p class="eyebrow mb-3">DESKNOVA // COLECCIÓN OTOÑO 2026</p>
+              <h1 class="display-4 fw-bolder text-dark mb-4 tracking-tight" style="line-height: 1.15;">
+                Tecnología que transforma tu espacio de trabajo.
+              </h1>
+              <p class="lead text-secondary fw-normal mb-5 pe-lg-5" style="font-size: 1.08rem;">
+                Accesorios y periféricos concebidos para quienes aprecian la pureza de cada pulsación, la precisión táctil milimétrica y la armonía visual sin distracciones.
+              </p>
+              <div class="d-flex flex-wrap gap-3">
+                <button class="btn btn-dark btn-lg rounded-0 px-5 py-3 text-uppercase fw-bold" style="font-size: 0.84rem; letter-spacing: 0.1em;" onclick="Router.navigate('catalog');">
+                  Ver Catálogo Extenso <i class="bi bi-arrow-right ms-2"></i>
+                </button>
+                <button class="btn btn-outline-dark btn-lg rounded-0 px-4 py-3 text-uppercase" style="font-size: 0.84rem; letter-spacing: 0.1em;" onclick="document.getElementById('landingOffersSection').scrollIntoView({ behavior: 'smooth' });">
+                  Ofertas Destacadas
+                </button>
               </div>
-              <button class="btn-filter" id="apply-price-filter">Aplicar</button>
-            </div>
-          </div>
-          <div class="sidebar-section">
-            <h3 class="sidebar-title">Ordenar por</h3>
-            <select class="sort-select" id="sort-select">
-              <option value="default">Por defecto</option>
-              <option value="price-asc">Precio: menor a mayor</option>
-              <option value="price-desc">Precio: mayor a menor</option>
-              <option value="name-asc">Nombre A-Z</option>
-              <option value="rating">Mejor calificados</option>
-            </select>
-          </div>
-        </aside>
-        <main class="catalog-main">
-          <div class="catalog-topbar">
-            <div class="catalog-title-group">
-              <p class="eyebrow">DESKNOVA / CATÁLOGO</p>
-              <h1 class="catalog-title">Tienda</h1>
-              <span id="products-count" class="products-badge">15 productos</span>
-            </div>
-            <div class="search-wrapper">
-              <span class="search-icon" aria-hidden="true">⌕</span>
-              <input type="search" id="search-input" class="search-input" placeholder="Buscar productos..."/>
-              <button class="clear-search hidden" id="clear-search" aria-label="Limpiar búsqueda">×</button>
-            </div>
-            <button class="mobile-filter-toggle" id="mobile-filter-toggle">☷ Filtros</button>
-          </div>
-          <div class="products-grid" id="products-grid"></div>
-          <div class="empty-state hidden" id="empty-state">
-            <div class="empty-icon">⌕</div>
-            <h3>Sin resultados</h3>
-            <p>No encontramos productos con esos filtros.</p>
-            <button class="btn-outline" id="reset-filters">Limpiar filtros</button>
-          </div>
-        </main>
-      </div>
-    </section>
 
-    <!-- 3. VISTA: CARRITO -->
-    <section id="view-cart" class="view hidden">
-      <div class="cart-layout">
-        <div class="cart-items-section">
-          <div class="cart-header">
-            <div><p class="eyebrow">DESKNOVA / TU PEDIDO</p><h1 class="cart-title">Mi carrito</h1></div>
-            <button id="clear-cart-btn" class="clear-cart-btn">Vaciar carrito</button>
+              <!-- Garantías Minimalistas -->
+              <div class="row mt-5 pt-4 border-top border-light g-4">
+                <div class="col-4">
+                  <span class="d-block fw-bold fs-5 text-dark">48 Horas</span>
+                  <span class="eyebrow">Despacho express</span>
+                </div>
+                <div class="col-4">
+                  <span class="d-block fw-bold fs-5 text-dark">2 Años</span>
+                  <span class="eyebrow">Garantía oficial</span>
+                </div>
+                <div class="col-4">
+                  <span class="d-block fw-bold fs-5 text-dark">+25 Modelos</span>
+                  <span class="eyebrow">Catálogo premium</span>
+                </div>
+              </div>
+            </div>
+
+            <div class="col-lg-6">
+              <div class="position-relative">
+                <img 
+                  src="https://images.unsplash.com/photo-1498050108023-c5249f4df085?auto=format&fit=crop&w=1200&q=85" 
+                  alt="Workspace minimalista Desknova" 
+                  class="hero-editorial-img" 
+                  loading="eager"
+                />
+                <div class="position-absolute bottom-0 start-0 p-3 m-3 border border-light d-none d-md-block shadow-sm" style="background-color: var(--bg-body);">
+                  <span class="eyebrow d-block">Setup Destacado</span>
+                  <span class="fw-bold text-dark fs-6">Desknova Studio Setup 2026</span>
+                </div>
+              </div>
+            </div>
           </div>
-          <div class="shipping-progress-wrapper" id="shipping-progress-wrapper">
-            <div class="shipping-progress-header"><span id="shipping-message" class="shipping-message"></span><span id="shipping-percent" class="shipping-percent"></span></div>
-            <div class="shipping-progress-bar"><div class="shipping-progress-fill" id="shipping-progress-fill"></div></div>
-          </div>
-          <div id="cart-items-list" class="cart-items-list"></div>
-          <div class="cart-empty hidden" id="cart-empty">
-            <div class="cart-empty-icon">□</div>
-            <h3>Tu carrito está vacío</h3>
-            <p>Explora la tienda y encuentra tu próxima mejora.</p>
-            <button class="btn-primary" data-view="catalog">Ir a la tienda <span aria-hidden="true">→</span></button>
-          </div>
-          <div id="cart-content-wrapper"><button class="btn-ghost back-to-shop" data-view="catalog">← Seguir comprando</button></div>
         </div>
-        <aside class="cart-summary" id="cart-summary">
-          <p class="eyebrow">RESUMEN</p><h2 class="summary-title">Tu pedido</h2>
-          <div class="summary-lines">
-            <div class="summary-line"><span>Subtotal</span><span id="summary-subtotal">$0.00</span></div>
-            <div class="summary-line" id="summary-shipping-line"><span>Envío</span><span id="summary-shipping">$15.00</span></div>
-            <div class="summary-line discount hidden" id="summary-free-shipping-line"><span>Envío gratis aplicado</span><span class="discount-amount">-$15.00</span></div>
-          </div>
-          <div class="summary-divider"></div>
-          <div class="summary-total"><span>Total</span><span id="summary-total">$0.00</span></div>
-          <button class="btn-primary full-width checkout-btn" id="checkout-btn">Proceder al pago <span aria-hidden="true">→</span></button>
-          <div class="secure-badge">◇ Pago seguro y protegido</div>
-          <div class="payment-methods"><span>Aceptamos</span><div class="payment-icons"><div class="pay-icon">VISA</div><div class="pay-icon">MC</div><div class="pay-icon">AMEX</div><div class="pay-icon">PayPal</div></div></div>
-        </aside>
-      </div>
-    </section>
+      </header>
 
-    <!-- 4. VISTA: LOGIN -->
-    <section id="view-login" class="view hidden">
-      <div class="auth-layout">
-        <aside class="auth-visual">
-          <div class="auth-visual-content">
-            <a class="auth-brand" href="#landing" data-view="landing"><span class="brand-mark">D</span> Desk<strong>Nova</strong></a>
-            <p class="eyebrow">TU ESPACIO, A TU MANERA</p>
-            <h2>Todo listo para volver a crear.</h2>
-            <p>Accede a tu cuenta para continuar con tu compra y llevar tu setup al siguiente nivel.</p>
-            <div class="auth-features">
-              <div class="auth-feature"><span>↗</span> Envío express en 48h</div>
-              <div class="auth-feature"><span>◇</span> Garantía de 2 años</div>
-              <div class="auth-feature"><span>✳</span> Envío gratis desde $150</div>
+      <!-- Sección de Ofertas Destacadas o Nuevos Lanzamientos (Carrusel) -->
+      <section class="featured-offers-section py-5 my-3" id="landingOffersSection">
+        <div class="container-fluid px-lg-5 py-4">
+          <div class="d-flex flex-wrap justify-content-between align-items-end mb-4 pb-2 border-bottom border-light">
+            <div>
+              <p class="eyebrow text-danger mb-1">OPORTUNIDADES DE TEMPORADA // PRECIOS ESPECIALES</p>
+              <h2 class="display-6 fw-bolder text-dark mb-0">Ofertas Destacadas & Nuevos Lanzamientos</h2>
+            </div>
+            <div class="d-flex align-items-center gap-3 mt-3 mt-md-0">
+              <button class="btn btn-link text-dark text-decoration-none fw-bold p-0 me-2" onclick="Router.navigate('catalog');" style="font-size: 0.88rem;">
+                Ver todo el catálogo (+25) <i class="bi bi-arrow-right ms-1"></i>
+              </button>
+              <!-- Controles de Navegación del Carrusel -->
+              <div class="d-flex gap-2">
+                <button class="btn btn-outline-dark rounded-0 carousel-nav-btn" id="offersCarouselPrev" aria-label="Ofertas anteriores" title="Anterior">
+                  <i class="bi bi-chevron-left"></i>
+                </button>
+                <button class="btn btn-outline-dark rounded-0 carousel-nav-btn" id="offersCarouselNext" aria-label="Ofertas siguientes" title="Siguiente">
+                  <i class="bi bi-chevron-right"></i>
+                </button>
+              </div>
             </div>
           </div>
-        </aside>
-        <div class="auth-form-container">
-          <div class="auth-form-inner">
-            <button class="back-btn" data-view="catalog"><span aria-hidden="true">←</span> Volver a la tienda</button>
-            <div class="form-header"><p class="eyebrow">BIENVENIDO DE VUELTA</p><h1>Inicia sesión</h1><p>Ingresa tus credenciales para continuar.</p></div>
-            <form id="login-form" class="login-form" novalidate>
-              <div class="form-group"><label for="email">Correo electrónico</label><div class="input-wrapper"><input type="email" id="email" name="email" placeholder="demo@desknova.com" autocomplete="email" /></div><span class="field-error" id="email-error"></span></div>
-              <div class="form-group"><label for="password">Contraseña</label><div class="input-wrapper"><input type="password" id="password" name="password" placeholder="Tu contraseña" autocomplete="current-password" /><button type="button" class="toggle-password" id="toggle-pwd" aria-label="Mostrar contraseña"><svg id="eye-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg></button></div><span class="field-error" id="password-error"></span></div>
-              <div id="login-error" class="login-error hidden"><span aria-hidden="true">!</span><span id="login-error-msg">Credenciales incorrectas</span></div>
-              <button type="submit" class="btn-primary full-width" id="login-submit"><span class="btn-text">Iniciar sesión <span aria-hidden="true">→</span></span><span class="btn-loader hidden"></span></button>
-            </form>
-            <div class="demo-hint"><strong>Cuenta demo</strong><span>demo@desknova.com / demo</span></div>
+
+          <!-- Carrusel de Ofertas Fluido con Soporte Touch/Mouse -->
+          <div class="offers-carousel-wrapper position-relative">
+            <div class="offers-carousel-track" id="offersGrid" role="region" aria-label="Carrusel de ofertas destacadas">
+              <!-- Renderizado dinámico desde app.js -->
+            </div>
           </div>
+
+          <!-- Indicadores de posición / Dots interactivos -->
+          <div class="d-flex justify-content-center align-items-center gap-2 mt-4" id="offersCarouselDots">
+          </div>
+        </div>
+      </section>
+
+      <!-- Sección Editorial / Filosofía de Marca -->
+      <section class="editorial-quote-section py-5">
+        <div class="container-fluid px-lg-5 py-5 text-center">
+          <div class="mx-auto" style="max-width: 760px;">
+            <p class="eyebrow mb-3">LA FILOSOFÍA DESKNOVA</p>
+            <h3 class="display-6 fw-bold text-dark mb-4" style="line-height: 1.3;">
+              "Creemos que las mejores herramientas son aquellas que desaparecen en tus manos, permitiendo que tus ideas fluyan sin obstáculos."
+            </h3>
+            <p class="text-secondary fw-normal fs-6 mb-5">
+              Materiales nobles, estructuras de aluminio mecanizado CNC, lubricación de fábrica y sensores de grado profesional. Diseñamos para creadores y profesionales exigentes.
+            </p>
+            <button class="btn btn-dark btn-lg rounded-0 px-5 py-3 text-uppercase fw-bold" onclick="Router.navigate('catalog');" style="font-size: 0.82rem; letter-spacing: 0.1em;">
+              Explorar Catálogo Extenso
+            </button>
+          </div>
+        </div>
+      </section>
+
+    </section>
+
+    <!-- ═════════════════════════════════════════════════════════════════
+         VISTA 2: CATÁLOGO EXTENSO Y FILTROS COMBINABLES (RF001)
+         Aquí SÍ se encuentra el panel lateral de filtros, el buscador
+         rápido superior, el selector de orden y el grid con más de 20 productos.
+         ═════════════════════════════════════════════════════════════════ -->
+    <section id="view-catalog" class="app-view d-none py-5">
+      <div class="container-fluid px-lg-5">
+        
+        <!-- Encabezado de Catálogo: Buscador Rápido, Conteo y Selector de Orden -->
+        <div class="row align-items-center justify-content-between g-3 mb-4 pb-3 border-bottom border-light">
+          
+          <div class="col-md-4">
+            <div class="input-group">
+              <span class="input-group-text border-end-0 rounded-0 text-muted" style="background-color: var(--bg-card-media);">
+                <i class="bi bi-search"></i>
+              </span>
+              <input 
+                type="text" 
+                id="searchInput" 
+                class="form-control border-start-0 rounded-0 ps-0" 
+                placeholder="Buscar por nombre, sensor o marca..." 
+                aria-label="Buscar periféricos"
+              />
+              <button class="btn btn-outline-secondary border-start-0 rounded-0 d-none" type="button" id="clearSearchBtn" title="Limpiar búsqueda">
+                <i class="bi bi-x-lg"></i>
+              </button>
+            </div>
+          </div>
+
+          <div class="col-md-4 text-center text-md-start">
+            <span class="text-secondary fw-normal" style="font-size: 0.9rem;" id="resultsCount">
+              Mostrando productos
+            </span>
+          </div>
+
+          <div class="col-md-4 d-flex justify-content-md-end align-items-center gap-2">
+            <label for="sortSelect" class="text-nowrap eyebrow mb-0">Ordenar:</label>
+            <select class="form-select rounded-0" id="sortSelect" style="max-width: 220px;" aria-label="Ordenar productos">
+              <option value="featured">Destacados</option>
+              <option value="price-asc">Precio: Menor a Mayor</option>
+              <option value="price-desc">Precio: Mayor a Menor</option>
+              <option value="name-asc">Nombre: A - Z</option>
+              <option value="rating">Mejor Calificados</option>
+            </select>
+
+            <!-- Botón toggle de filtros en móviles -->
+            <button class="btn btn-outline-dark rounded-0 d-lg-none" type="button" data-bs-toggle="collapse" data-bs-target="#filtersSidebar" aria-expanded="false" aria-controls="filtersSidebar">
+              <i class="bi bi-funnel me-1"></i> Filtros
+            </button>
+          </div>
+        <!-- Barra Rápida de Categorías Desplazable Horizontalmente -->
+        <div class="quick-category-pills-bar mb-4" id="quickCategoryPills" aria-label="Navegación rápida de categorías">
+          <button class="btn btn-sm btn-dark rounded-0 px-3 py-2 quick-cat-btn active" data-category="all">Todos los productos</button>
+          <button class="btn btn-sm btn-outline-dark rounded-0 px-3 py-2 quick-cat-btn" data-category="teclados">Teclados</button>
+          <button class="btn btn-sm btn-outline-dark rounded-0 px-3 py-2 quick-cat-btn" data-category="ratones">Ratones</button>
+          <button class="btn btn-sm btn-outline-dark rounded-0 px-3 py-2 quick-cat-btn" data-category="audio">Audio y Micrófonos</button>
+          <button class="btn btn-sm btn-outline-dark rounded-0 px-3 py-2 quick-cat-btn" data-category="monitores">Monitores</button>
+          <button class="btn btn-sm btn-outline-dark rounded-0 px-3 py-2 quick-cat-btn" data-category="iluminacion">Iluminación</button>
+          <button class="btn btn-sm btn-outline-dark rounded-0 px-3 py-2 quick-cat-btn" data-category="accesorios">Accesorios</button>
+        </div>
+
+        <!-- Layout de Catálogo: Barra Lateral de Filtros Combinables + Grid -->
+        <div class="row g-5">
+          
+          <!-- SIDEBAR DE FILTROS COMBINABLES (RF001) -->
+          <aside class="col-lg-3 col-xl-2 collapse d-lg-block" id="filtersSidebar">
+            <div class="sticky-top filter-sidebar-scroll" style="top: 96px; z-index: 10;">
+              <div class="d-flex align-items-center justify-content-between mb-4">
+                <h2 class="filter-section-title mb-0">Filtros</h2>
+                <button class="btn btn-link text-decoration-none text-muted p-0" id="resetFiltersBtn" style="font-size: 0.78rem;">
+                  Restablecer
+                </button>
+              </div>
+
+              <!-- Filtro 1: Categoría -->
+              <div class="mb-4 pb-3 border-bottom border-light">
+                <h3 class="filter-section-title">Categoría</h3>
+                <div class="d-flex flex-column" id="categoryFilterContainer">
+                  <a class="filter-category-link active" data-category="all">Todos los productos</a>
+                  <a class="filter-category-link" data-category="teclados">Teclados</a>
+                  <a class="filter-category-link" data-category="ratones">Ratones</a>
+                  <a class="filter-category-link" data-category="audio">Audio y Micrófonos</a>
+                  <a class="filter-category-link" data-category="monitores">Monitores</a>
+                  <a class="filter-category-link" data-category="iluminacion">Iluminación</a>
+                  <a class="filter-category-link" data-category="accesorios">Accesorios</a>
+                </div>
+              </div>
+
+              <!-- Filtro 2: Rango de Precio -->
+              <div class="mb-4 pb-3 border-bottom border-light">
+                <h3 class="filter-section-title">Rango de Precio ($)</h3>
+                <div class="row g-2 mb-2">
+                  <div class="col-6">
+                    <input type="number" id="priceMin" class="form-control rounded-0 form-control-sm" placeholder="Mín" min="0" />
+                  </div>
+                  <div class="col-6">
+                    <input type="number" id="priceMax" class="form-control rounded-0 form-control-sm" placeholder="Máx" min="0" />
+                  </div>
+                </div>
+                <button class="btn btn-outline-dark btn-sm rounded-0 w-100 text-uppercase" id="applyPriceBtn" style="font-size: 0.72rem; letter-spacing: 0.08em;">
+                  Aplicar Rango
+                </button>
+              </div>
+
+              <!-- Filtro 3: Marca -->
+              <div class="mb-4 pb-3 border-bottom border-light">
+                <h3 class="filter-section-title">Marca</h3>
+                <div class="d-flex flex-column gap-2" id="brandFilters">
+                  <div class="form-check">
+                    <input class="form-check-input filter-brand-check" type="checkbox" value="Keychron" id="brandKeychron" />
+                    <label class="form-check-label" for="brandKeychron">Keychron</label>
+                  </div>
+                  <div class="form-check">
+                    <input class="form-check-input filter-brand-check" type="checkbox" value="Logitech" id="brandLogitech" />
+                    <label class="form-check-label" for="brandLogitech">Logitech</label>
+                  </div>
+                  <div class="form-check">
+                    <input class="form-check-input filter-brand-check" type="checkbox" value="Razer" id="brandRazer" />
+                    <label class="form-check-label" for="brandRazer">Razer</label>
+                  </div>
+                  <div class="form-check">
+                    <input class="form-check-input filter-brand-check" type="checkbox" value="SteelSeries" id="brandSteel" />
+                    <label class="form-check-label" for="brandSteel">SteelSeries</label>
+                  </div>
+                  <div class="form-check">
+                    <input class="form-check-input filter-brand-check" type="checkbox" value="Audio-Technica" id="brandAudioTech" />
+                    <label class="form-check-label" for="brandAudioTech">Audio-Technica</label>
+                  </div>
+                  <div class="form-check">
+                    <input class="form-check-input filter-brand-check" type="checkbox" value="Sony" id="brandSony" />
+                    <label class="form-check-label" for="brandSony">Sony</label>
+                  </div>
+                  <div class="form-check">
+                    <input class="form-check-input filter-brand-check" type="checkbox" value="Dell" id="brandDell" />
+                    <label class="form-check-label" for="brandDell">Dell</label>
+                  </div>
+                  <div class="form-check">
+                    <input class="form-check-input filter-brand-check" type="checkbox" value="BenQ" id="brandBenQ" />
+                    <label class="form-check-label" for="brandBenQ">BenQ</label>
+                  </div>
+                  <div class="form-check">
+                    <input class="form-check-input filter-brand-check" type="checkbox" value="Elgato" id="brandElgato" />
+                    <label class="form-check-label" for="brandElgato">Elgato</label>
+                  </div>
+                  <div class="form-check">
+                    <input class="form-check-input filter-brand-check" type="checkbox" value="Zowie" id="brandZowie" />
+                    <label class="form-check-label" for="brandZowie">Zowie</label>
+                  </div>
+                  <div class="form-check">
+                    <input class="form-check-input filter-brand-check" type="checkbox" value="NuPhy" id="brandNuphy" />
+                    <label class="form-check-label" for="brandNuphy">NuPhy</label>
+                  </div>
+                  <div class="form-check">
+                    <input class="form-check-input filter-brand-check" type="checkbox" value="Shure" id="brandShure" />
+                    <label class="form-check-label" for="brandShure">Shure</label>
+                  </div>
+                  <div class="form-check">
+                    <input class="form-check-input filter-brand-check" type="checkbox" value="LG" id="brandLG" />
+                    <label class="form-check-label" for="brandLG">LG</label>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Filtro 4: Tipo de Conexión -->
+              <div class="mb-4 pb-3 border-bottom border-light">
+                <h3 class="filter-section-title">Tipo de Conexión</h3>
+                <div class="d-flex flex-column gap-2" id="connectionFilters">
+                  <div class="form-check">
+                    <input class="form-check-input filter-conn-check" type="checkbox" value="Inalámbrico 2.4GHz" id="connWireless" />
+                    <label class="form-check-label" for="connWireless">Inalámbrico 2.4GHz</label>
+                  </div>
+                  <div class="form-check">
+                    <input class="form-check-input filter-conn-check" type="checkbox" value="Bluetooth" id="connBT" />
+                    <label class="form-check-label" for="connBT">Bluetooth</label>
+                  </div>
+                  <div class="form-check">
+                    <input class="form-check-input filter-conn-check" type="checkbox" value="Tri-modo" id="connTri" />
+                    <label class="form-check-label" for="connTri">Tri-modo / Híbrido</label>
+                  </div>
+                  <div class="form-check">
+                    <input class="form-check-input filter-conn-check" type="checkbox" value="Cableado USB-C" id="connWired" />
+                    <label class="form-check-label" for="connWired">Cableado USB-C</label>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Filtro 5: Disponibilidad -->
+              <div class="mb-4">
+                <h3 class="filter-section-title">Disponibilidad</h3>
+                <div class="form-check">
+                  <input class="form-check-input" type="checkbox" id="stockOnlyCheck" />
+                  <label class="form-check-label" for="stockOnlyCheck">Solo productos en stock</label>
+                </div>
+              </div>
+
+            </div>
+          </aside>
+
+          <!-- GRID DE PRODUCTOS EXTENSO: row row-cols-1 row-cols-sm-2 row-cols-md-3 row-cols-lg-4 g-4 (RF001) -->
+          <section class="col-lg-9 col-xl-10">
+            <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 row-cols-lg-4 g-4" id="productsGrid">
+              <!-- Renderizado dinámico de los 26 productos -->
+            </div>
+
+            <!-- Estado Vacío cuando no hay resultados -->
+            <div class="text-center py-5 d-none my-5" id="emptyState">
+              <div class="mb-3">
+                <i class="bi bi-search text-muted" style="font-size: 2.5rem;"></i>
+              </div>
+              <h3 class="fw-bold fs-4 text-dark mb-2">No se encontraron productos</h3>
+              <p class="text-secondary fw-normal mb-4">Intenta ajustar o reiniciar los filtros de búsqueda aplicados.</p>
+              <button class="btn btn-dark rounded-0 px-4 py-2 text-uppercase" style="font-size: 0.8rem;" onclick="CatalogModule.resetFilters();">
+                Restablecer Filtros
+              </button>
+            </div>
+          </section>
+
         </div>
       </div>
     </section>
 
   </main>
 
-  <!-- DOCK FLOTANTE DE COMPARACIÓN -->
-  <aside id="compare-dock" class="compare-dock hidden" aria-live="polite">
-    <div class="compare-dock-copy"><span class="compare-dock-icon" aria-hidden="true">⇆</span><div><strong id="compare-count">0 productos seleccionados</strong><span id="compare-hint">Selecciona al menos 2 para compararlos</span></div></div>
-    <div class="compare-dock-actions"><button class="compare-clear" id="compare-clear">Limpiar</button><button class="compare-open" id="compare-open" disabled>Ver comparación <span aria-hidden="true">→</span></button></div>
-  </aside>
+  <!-- MODAL: AUTENTICACIÓN ELEGANTE Y MINIMALISTA -->
+  <div class="modal fade" id="authModal" tabindex="-1" aria-labelledby="authModalTitle" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" style="max-width: 440px;">
+      <div class="modal-content rounded-0">
+        <div class="modal-header border-0 pb-0">
+          <button type="button" class="btn-close shadow-none ms-auto" data-bs-dismiss="modal" aria-label="Cerrar modal"></button>
+        </div>
+        <div class="modal-body p-4 pt-0">
+          <div class="text-center mb-4">
+            <span class="brand-title d-block mb-1">Desk<strong>nova</strong></span>
+            <p class="text-muted fw-normal" style="font-size: 0.85rem;">Accede a tu cuenta boutique para continuar con tu experiencia de compra.</p>
+          </div>
 
-  <!-- TOAST NOTIFICATIONS -->
-  <div id="toast" class="toast hidden" role="status" aria-live="polite"><span id="toast-icon" class="toast-icon"></span><span id="toast-message" class="toast-message"></span></div>
+          <!-- Pestañas: Iniciar Sesión / Registrarse -->
+          <ul class="nav nav-tabs nav-fill mb-4 border-light" id="authTabs" role="tablist">
+            <li class="nav-item" role="presentation">
+              <button class="nav-link active" id="login-tab" data-bs-toggle="tab" data-bs-target="#loginTabPane" type="button" role="tab">Iniciar Sesión</button>
+            </li>
+            <li class="nav-item" role="presentation">
+              <button class="nav-link" id="register-tab" data-bs-toggle="tab" data-bs-target="#registerTabPane" type="button" role="tab">Crear Cuenta</button>
+            </li>
+          </ul>
 
-  <!-- MODAL: COMPARACIÓN -->
-  <div id="compare-modal" class="modal-overlay compare-overlay hidden" role="dialog" aria-modal="true" aria-labelledby="compare-title">
-    <section class="compare-modal-card">
-      <header class="compare-modal-header"><div><p class="eyebrow">DESKNOVA / COMPARATIVA</p><h2 id="compare-title">Encuentra tu mejor opción</h2></div><button class="compare-close" id="compare-close" aria-label="Cerrar comparación">×</button></header>
-      <div class="compare-table-wrap"><table class="compare-table"><thead id="compare-table-head"></thead><tbody id="compare-table-body"></tbody></table></div>
-      <footer class="compare-modal-footer"><span>Comparación de precio, categoría y valoración</span><button class="btn-outline" id="compare-done">Volver a la tienda</button></footer>
-    </section>
-  </div>
+          <div class="tab-content" id="authTabsContent">
+            <!-- PESTAÑA 1: INICIAR SESIÓN -->
+            <div class="tab-pane fade show active" id="loginTabPane" role="tabpanel">
+              <form id="loginForm" novalidate>
+                <div class="mb-3">
+                  <label for="loginEmail" class="form-label text-secondary" style="font-size: 0.82rem;">Correo electrónico *</label>
+                  <input type="email" class="form-control rounded-0" id="loginEmail" placeholder="demo@desknova.com" required />
+                  <div class="invalid-feedback">Por favor ingresa un correo válido.</div>
+                </div>
+                <div class="mb-4">
+                  <label for="loginPassword" class="form-label text-secondary" style="font-size: 0.82rem;">Contraseña *</label>
+                  <input type="password" class="form-control rounded-0" id="loginPassword" placeholder="••••••••" required />
+                  <div class="invalid-feedback">Ingresa tu contraseña.</div>
+                </div>
+                <button type="submit" class="btn btn-dark w-100 rounded-0 py-2 text-uppercase fw-bold mb-3" style="font-size: 0.82rem; letter-spacing: 0.06em;">
+                  Entrar a mi Cuenta
+                </button>
+                <div class="text-center">
+                  <button type="button" class="btn btn-link text-muted text-decoration-none p-0" id="quickDemoLoginBtn" style="font-size: 0.78rem;">
+                    Usar credenciales de demostración rápida
+                  </button>
+                </div>
+              </form>
+            </div>
 
-  <!-- MODAL: CHECKOUT -->
-  <div id="checkout-modal" class="modal-overlay hidden" role="dialog" aria-modal="true" aria-labelledby="checkout-title">
-    <div class="modal-card">
-      <div class="modal-icon success">✓</div>
-      <p id="checkout-step-label" class="eyebrow">CHECKOUT</p>
-      <h2 id="checkout-title">Revisa tu pedido</h2>
-      <p id="checkout-description"></p>
-      <div class="checkout-modal-actions" id="checkout-actions">
-        <button class="btn-outline" id="checkout-cancel">Volver al carrito</button>
-        <button class="btn-primary" id="confirm-order">Confirmar pedido</button>
+            <!-- PESTAÑA 2: REGISTRO -->
+            <div class="tab-pane fade" id="registerTabPane" role="tabpanel">
+              <form id="registerForm" novalidate>
+                <div class="mb-3">
+                  <label for="regName" class="form-label text-secondary" style="font-size: 0.82rem;">Nombre completo *</label>
+                  <input type="text" class="form-control rounded-0" id="regName" placeholder="Tu nombre" required />
+                </div>
+                <div class="mb-3">
+                  <label for="regEmail" class="form-label text-secondary" style="font-size: 0.82rem;">Correo electrónico *</label>
+                  <input type="email" class="form-control rounded-0" id="regEmail" placeholder="tu@correo.com" required />
+                </div>
+                <div class="mb-4">
+                  <label for="regPassword" class="form-label text-secondary" style="font-size: 0.82rem;">Contraseña *</label>
+                  <input type="password" class="form-control rounded-0" id="regPassword" placeholder="Al menos 6 caracteres" required minlength="6" />
+                </div>
+                <button type="submit" class="btn btn-dark w-100 rounded-0 py-2 text-uppercase fw-bold" style="font-size: 0.82rem; letter-spacing: 0.06em;">
+                  Registrarme Ahora
+                </button>
+              </form>
+            </div>
+          </div>
+
+        </div>
       </div>
-      <button class="btn-primary hidden" id="modal-close">Continuar comprando</button>
     </div>
   </div>
 
-  <script src="app.js" defer></script>
+  <!-- DOCK FLOTANTE TEMPORAL DE COMPARACIÓN CON VALIDACIÓN DE MISMA CATEGORÍA (RF002) -->
+  <aside class="compare-floating-dock hidden" id="compareDock" aria-live="polite" aria-label="Barra de comparación">
+    <div class="d-flex align-items-center gap-3">
+      <div class="compare-dock-thumbs" id="compareDockThumbs">
+        <!-- Miniaturas dinámicas -->
+      </div>
+      <div>
+        <div class="d-flex align-items-center gap-2">
+          <span class="fw-bold text-white fs-6" id="compareDockCount">0 productos seleccionados</span>
+          <span class="badge bg-secondary rounded-0 text-uppercase" id="compareCategoryBadge" style="font-size: 0.65rem;">Categoría</span>
+        </div>
+        <span class="eyebrow text-light" style="opacity: 0.8;" id="compareDockHint">Selecciona al menos 2 para comparar</span>
+      </div>
+    </div>
+
+    <div class="d-flex align-items-center gap-2">
+      <button class="btn btn-sm btn-outline-light rounded-0" id="compareDockClear" onclick="CompareModule.clear();">
+        Limpiar
+      </button>
+      <button class="btn btn-sm btn-light rounded-0 fw-bold px-3" id="compareDockOpen" onclick="CompareModule.open();">
+        Comparar ahora <i class="bi bi-arrow-right ms-1"></i>
+      </button>
+    </div>
+  </aside>
+
+  <!-- MODAL: COMPARACIÓN DE PRODUCTOS EN PARALELO (RF002) -->
+  <div class="modal fade" id="compareModal" tabindex="-1" aria-labelledby="compareModalTitle" aria-hidden="true">
+    <div class="modal-dialog modal-xl modal-dialog-centered modal-dialog-scrollable">
+      <div class="modal-content rounded-0">
+        <div class="modal-header py-3" style="background-color: var(--bg-body);">
+          <div>
+            <p class="eyebrow mb-1">DESKNOVA // COMPARATIVA TÉCNICA PARALELA</p>
+            <h2 class="modal-title fs-4 fw-bold text-dark" id="compareModalTitle">Comparación Técnica de Periféricos</h2>
+          </div>
+          <button type="button" class="btn-close shadow-none" data-bs-dismiss="modal" aria-label="Cerrar modal de comparación"></button>
+        </div>
+        <div class="modal-body p-0">
+          <div class="p-2 bg-light border-bottom border-light d-flex align-items-center justify-content-between px-3">
+            <span class="eyebrow mb-0 text-secondary" style="font-size: 0.72rem;">
+              <i class="bi bi-arrows-expand me-1"></i> Desliza horizontalmente la tabla para ver y comparar todos los productos
+            </span>
+          </div>
+          <div class="table-responsive compare-table-container">
+            <table class="table compare-table w-100 mb-0">
+              <thead id="compareTableHead"></thead>
+              <tbody id="compareTableBody"></tbody>
+            </table>
+          </div>
+        </div>
+        <div class="modal-footer bg-subtle py-3 d-flex justify-content-between">
+          <span class="text-muted fw-normal" style="font-size: 0.82rem;">
+            Diferencias alineadas de precio, sensor, conexión y disponibilidad (Misma categoría obligatoria).
+          </span>
+          <button type="button" class="btn btn-outline-dark rounded-0 px-4" data-bs-dismiss="modal">
+            Continuar Explorando
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- MODAL: DETALLE INDIVIDUAL DE PRODUCTO CON EFECTO DE LUPA / ZOOM (RF003) -->
+  <div class="modal fade" id="productDetailModal" tabindex="-1" aria-labelledby="detailTitle" aria-hidden="true">
+    <div class="modal-dialog modal-xl modal-dialog-centered modal-dialog-scrollable">
+      <div class="modal-content rounded-0">
+        <div class="modal-header border-0 pb-0">
+          <button type="button" class="btn-close shadow-none ms-auto" data-bs-dismiss="modal" aria-label="Cerrar detalle"></button>
+        </div>
+        <div class="modal-body p-4 p-lg-5 pt-0">
+          <div class="row g-5 align-items-start">
+            
+            <!-- Columna Izquierda: Imagen Grande con EFECTO ZOOM / LUPA INTERACTIVO (RF003) -->
+            <div class="col-lg-6">
+              <div class="product-zoom-wrapper position-relative overflow-hidden bg-light" id="productZoomContainer" title="Mueve el cursor sobre la imagen para hacer zoom">
+                <span class="stock-pill" id="detailStockPill">En Stock</span>
+                <img src="" id="detailImage" alt="Detalle ampliable del producto" class="product-zoom-img" />
+                <span class="zoom-hint-badge"><i class="bi bi-zoom-in me-1"></i>Pasa el cursor para ampliar detalles</span>
+              </div>
+            </div>
+
+            <!-- Columna Derecha: Especificaciones Técnicas y Compra -->
+            <div class="col-lg-6">
+              <div class="d-flex align-items-center gap-2 mb-2">
+                <span class="badge-brand" id="detailBrand">MARCA</span>
+                <span class="text-muted">·</span>
+                <span class="eyebrow" id="detailCategory">CATEGORÍA</span>
+              </div>
+
+              <h2 class="fw-bold text-dark fs-2 mb-2" id="detailName">Nombre del Periférico</h2>
+              
+              <div class="d-flex align-items-center gap-2 mb-3">
+                <div class="text-dark" id="detailRatingStars">★★★★★</div>
+                <span class="text-muted fw-normal" style="font-size: 0.85rem;" id="detailReviewsCount">(0 reseñas)</span>
+              </div>
+
+              <!-- Precio Final -->
+              <div class="d-flex align-items-baseline gap-3 mb-4">
+                <span class="fs-2 fw-bolder text-dark" id="detailPrice">$0.00</span>
+                <span class="text-muted fw-normal" style="font-size: 0.82rem;">Impuestos incluidos</span>
+              </div>
+
+              <p class="text-secondary fw-normal mb-4" id="detailDescription" style="font-size: 0.95rem; line-height: 1.7;">
+                Descripción técnica del producto...
+              </p>
+
+              <!-- Especificaciones Técnicas (RF003) -->
+              <div class="mb-4">
+                <h3 class="filter-section-title mb-2">Especificaciones Técnicas</h3>
+                <table class="w-100 specs-table">
+                  <tbody>
+                    <tr>
+                      <th scope="row">Sensor / Componente:</th>
+                      <td id="detailSpecSensor">—</td>
+                    </tr>
+                    <tr>
+                      <th scope="row">Conexión:</th>
+                      <td id="detailSpecConnection">—</td>
+                    </tr>
+                    <tr>
+                      <th scope="row">Dimensiones y Peso:</th>
+                      <td id="detailSpecDimensions">—</td>
+                    </tr>
+                    <tr>
+                      <th scope="row">Autonomía / Alimentación:</th>
+                      <td id="detailSpecBattery">—</td>
+                    </tr>
+                    <tr>
+                      <th scope="row">Compatibilidad:</th>
+                      <td id="detailSpecCompatibility">—</td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+
+              <!-- Opciones de Entrega (RF003) -->
+              <div class="p-3 mb-4 border border-light" style="background-color: var(--bg-subtle);">
+                <div class="d-flex align-items-center gap-2 mb-2">
+                  <i class="bi bi-truck fs-5 text-dark"></i>
+                  <span class="fw-bold fs-6 text-dark">Opciones de Entrega Disponibles</span>
+                </div>
+                <ul class="list-unstyled mb-0 text-secondary fw-normal" style="font-size: 0.85rem;" id="detailDeliveryOptions">
+                  <li class="mb-1">✓ Envío Express nacional (24 a 48 horas)</li>
+                  <li class="mb-1">✓ Envío estándar gratuito en compras &gt; $150</li>
+                  <li>✓ Recogida inmediata en boutiques autorizadas Desknova</li>
+                </ul>
+              </div>
+
+              <!-- Selector de Cantidad y Acciones de Compra -->
+              <div class="d-flex flex-wrap gap-3 align-items-center">
+                <div class="quantity-stepper" id="detailQuantityContainer">
+                  <button type="button" id="detailQtyMinus" aria-label="Disminuir cantidad">−</button>
+                  <span id="detailQtyVal">1</span>
+                  <button type="button" id="detailQtyPlus" aria-label="Aumentar cantidad">+</button>
+                </div>
+
+                <button class="btn btn-dark rounded-0 px-4 py-3 flex-grow-1 text-uppercase fw-bold" id="detailAddToCartBtn" style="font-size: 0.82rem; letter-spacing: 0.08em;">
+                  Agregar a la Bolsa
+                </button>
+
+                <button class="btn btn-outline-dark rounded-0 px-3 py-3" id="detailCompareBtn" title="Comparar producto">
+                  <i class="bi bi-arrow-left-right"></i>
+                </button>
+              </div>
+
+            </div>
+
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- PANEL LATERAL OFFCANVAS: GESTIÓN DEL CARRITO (RF004) -->
+  <div class="offcanvas offcanvas-end rounded-0" tabindex="-1" id="cartOffcanvas" aria-labelledby="cartOffcanvasTitle" style="width: 440px; max-width: 95vw;">
+    <div class="offcanvas-header border-bottom border-light py-3">
+      <div>
+        <h2 class="offcanvas-title fs-5 fw-bold text-dark" id="cartOffcanvasTitle">Tu Carrito de Compra</h2>
+        <span class="eyebrow" id="cartHeaderCount">0 Artículos</span>
+      </div>
+      <button type="button" class="btn-close shadow-none" data-bs-dismiss="offcanvas" aria-label="Cerrar carrito"></button>
+    </div>
+
+    <div class="offcanvas-body p-4 d-flex flex-column">
+      
+      <!-- Barra de Envío Gratuito -->
+      <div class="mb-4 pb-3 border-bottom border-light" id="freeShippingContainer">
+        <div class="d-flex justify-content-between align-items-center mb-1">
+          <span class="fw-normal text-secondary" style="font-size: 0.82rem;" id="freeShippingMessage">
+            Agrega $150 para disfrutar de envío sin costo
+          </span>
+          <span class="fw-bold" style="font-size: 0.82rem;" id="freeShippingPercent">0%</span>
+        </div>
+        <div class="free-shipping-bar">
+          <div class="free-shipping-fill" id="freeShippingFill" style="width: 0%;"></div>
+        </div>
+      </div>
+
+      <!-- Lista de Ítems en el Carrito (RF004) -->
+      <div class="flex-grow-1 overflow-auto pe-1" id="cartItemsList"></div>
+
+      <!-- Estado Carrito Vacío -->
+      <div class="text-center py-5 d-none my-auto" id="cartEmptyState">
+        <i class="bi bi-bag text-muted mb-3 d-block" style="font-size: 2.5rem;"></i>
+        <h3 class="fs-5 fw-bold text-dark mb-1">Tu bolsa está vacía</h3>
+        <p class="text-secondary fw-normal mb-4" style="font-size: 0.88rem;">Explora nuestro catálogo para añadir periféricos de alto rendimiento.</p>
+        <button class="btn btn-outline-dark rounded-0 px-4 py-2 text-uppercase" style="font-size: 0.78rem;" data-bs-dismiss="offcanvas" onclick="Router.navigate('catalog');">
+          Explorar Catálogo
+        </button>
+      </div>
+
+      <!-- Resumen y Checkout Button (RF004 / RF005) -->
+      <div class="mt-4 pt-3 border-top border-light" id="cartSummarySection">
+        <div class="d-flex justify-content-between mb-2">
+          <span class="text-secondary fw-normal">Subtotal</span>
+          <span class="fw-bold text-dark" id="cartSubtotal">$0.00</span>
+        </div>
+        <div class="d-flex justify-content-between mb-2">
+          <span class="text-secondary fw-normal">Estimación de Envío</span>
+          <span class="fw-normal text-muted" id="cartShippingText">Calculado en checkout</span>
+        </div>
+        <div class="d-flex justify-content-between mb-4 pt-2 border-top border-light">
+          <span class="fw-bold text-dark fs-5">Total</span>
+          <span class="fw-bolder text-dark fs-5" id="cartTotal">$0.00</span>
+        </div>
+
+        <button class="btn btn-dark btn-lg w-100 rounded-0 py-3 text-uppercase fw-bold" id="proceedToCheckoutBtn" onclick="CheckoutModule.open();" style="font-size: 0.85rem; letter-spacing: 0.08em;">
+          Proceder al Checkout (3 Pasos)
+        </button>
+        
+        <div class="text-center mt-3">
+          <span class="eyebrow" style="font-size: 0.65rem;">Garantía Desknova de 30 días · Pago seguro simulado</span>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- ═════════════════════════════════════════════════════════════════
+       MODAL: CHECKOUT DIVIDIDO EN 3 PARTES / PASOS (NUEVO REQUISITO)
+       ═════════════════════════════════════════════════════════════════ -->
+  <!-- ═════════════════════════════════════════════════════════════════
+       MODAL: CHECKOUT DIVIDIDO EN 3 PARTES / PASOS (SCROLL CORREGIDO)
+       ═════════════════════════════════════════════════════════════════ -->
+  <div class="modal fade" id="checkoutModal" tabindex="-1" aria-labelledby="checkoutModalTitle" aria-hidden="true" data-bs-backdrop="static">
+    <div class="modal-dialog modal-lg modal-dialog-scrollable">
+      <div class="modal-content rounded-0">
+        
+        <!-- HEADER FIJO SIEMPRE VISIBLE -->
+        <div class="modal-header py-3 border-bottom border-light" style="background-color: var(--bg-body);">
+          <div>
+            <p class="eyebrow mb-1">DESKNOVA // CHECKOUT EN 3 PARTES</p>
+            <h2 class="modal-title fs-4 fw-bold text-dark" id="checkoutModalTitle">Proceso de Pago Seguro</h2>
+          </div>
+          <button type="button" class="btn-close shadow-none" data-bs-dismiss="modal" aria-label="Cerrar checkout"></button>
+        </div>
+
+        <!-- CUERPO PRINCIPAL CON SCROLL INDEPENDIENTE (FIX DEFINITIVO) -->
+        <div class="modal-body p-3 p-md-4" id="checkoutModalBody">
+
+          <!-- CONTENEDOR PRINCIPAL DEL WIZARD DE CHECKOUT -->
+          <div id="checkoutFormView">
+            
+            <!-- STEPPER INDICADOR DE 3 PARTES -->
+            <div class="checkout-stepper">
+              <div class="checkout-step-item active" id="stepIndicator1">
+                <span class="checkout-step-number" id="stepNum1">1</span>
+                <span>Entrega</span>
+              </div>
+              <div class="checkout-step-line" id="stepLine1"></div>
+              <div class="checkout-step-item" id="stepIndicator2">
+                <span class="checkout-step-number" id="stepNum2">2</span>
+                <span>Contacto</span>
+              </div>
+              <div class="checkout-step-line" id="stepLine2"></div>
+              <div class="checkout-step-item" id="stepIndicator3">
+                <span class="checkout-step-number" id="stepNum3">3</span>
+                <span>Pago y Fin</span>
+              </div>
+            </div>
+
+            <!-- Resumen Sintético Superior -->
+            <div class="p-3 mb-4 border border-light d-flex justify-content-between align-items-center" style="background-color: var(--bg-subtle);">
+              <div>
+                <span class="eyebrow d-block">TOTAL A FACTURAR</span>
+                <span class="fw-bolder text-dark fs-4" id="checkoutTotalPrice">$0.00</span>
+              </div>
+              <div class="text-end">
+                <span class="badge bg-dark rounded-0 px-2 py-1 text-uppercase" id="checkoutItemsCount" style="font-size: 0.72rem;">0 ítems</span>
+              </div>
+            </div>
+
+            <!-- FORMULARIO MULTI-PASO -->
+            <form id="checkoutForm" novalidate>
+
+              <!-- ── PARTE 1 DE 3: MODALIDAD Y DIRECCIÓN DE ENTREGA ── -->
+              <div id="checkoutStepPane1" class="checkout-step-pane">
+                <div class="d-flex align-items-center justify-content-between mb-3 pb-2 border-bottom border-light">
+                  <h3 class="filter-section-title mb-0 fs-6">Paso 1 de 3: Selección de Modalidad de Entrega</h3>
+                  <span class="badge bg-light text-dark border">Paso 1</span>
+                </div>
+                <p class="text-muted fw-normal mb-3" style="font-size: 0.82rem;">
+                  Elige cómo deseas recibir tu orden. Ninguna modalidad altera el precio final ($0.00 de costo adicional).
+                </p>
+
+                <div class="row g-3 mb-3">
+                  <div class="col-md-6">
+                    <label class="checkout-method-card d-block selected" id="methodHomeCard" for="methodHome">
+                      <div class="form-check">
+                        <input class="form-check-input" type="radio" name="deliveryMethod" id="methodHome" value="domicilio" checked />
+                        <label class="form-check-label fw-bold text-dark" for="methodHome">
+                          Envío a domicilio
+                        </label>
+                      </div>
+                      <small class="text-secondary d-block mt-1 ps-4">Despacho express asegurado en 24-48h</small>
+                    </label>
+                  </div>
+
+                  <div class="col-md-6">
+                    <label class="checkout-method-card d-block" id="methodPickupCard" for="methodPickup">
+                      <div class="form-check">
+                        <input class="form-check-input" type="radio" name="deliveryMethod" id="methodPickup" value="tienda" />
+                        <label class="form-check-label fw-bold text-dark" for="methodPickup">
+                          Recogida en tienda
+                        </label>
+                      </div>
+                      <small class="text-secondary d-block mt-1 ps-4">Retiro inmediato en boutique oficial Desknova</small>
+                    </label>
+                  </div>
+                </div>
+
+                <!-- Campos de Domicilio -->
+                <div id="deliveryHomeFields" class="border p-3 border-light mb-4">
+                  <div class="row g-3">
+                    <div class="col-md-8">
+                      <label for="addressInput" class="form-label text-secondary" style="font-size: 0.82rem;">Dirección completa de entrega *</label>
+                      <input type="text" class="form-control rounded-0" id="addressInput" placeholder="Ej: Carrera 15 #85-30, Apto 402" required />
+                      <div class="invalid-feedback">Por favor ingresa la dirección de entrega.</div>
+                    </div>
+                    <div class="col-md-4">
+                      <label for="cityInput" class="form-label text-secondary" style="font-size: 0.82rem;">Ciudad *</label>
+                      <input type="text" class="form-control rounded-0" id="cityInput" placeholder="Ej: Bogotá" required />
+                      <div class="invalid-feedback">Por favor ingresa la ciudad.</div>
+                    </div>
+                    <div class="col-md-6">
+                      <label for="postalInput" class="form-label text-secondary" style="font-size: 0.82rem;">Código Postal *</label>
+                      <input type="text" class="form-control rounded-0" id="postalInput" placeholder="Ej: 110221" required />
+                      <div class="invalid-feedback">Ingresa tu código postal.</div>
+                    </div>
+                    <div class="col-md-6">
+                      <label for="notesInput" class="form-label text-secondary" style="font-size: 0.82rem;">Instrucciones para entrega (Opcional)</label>
+                      <input type="text" class="form-control rounded-0" id="notesInput" placeholder="Ej: Dejar en recepción o portería" />
+                    </div>
+                  </div>
+                </div>
+
+                <!-- Campos de Recogida en Tienda -->
+                <div id="deliveryPickupFields" class="border p-3 border-light mb-4 d-none">
+                  <label for="pickupStoreSelect" class="form-label text-secondary" style="font-size: 0.82rem;">Selecciona la boutique oficial Desknova de recogida *</label>
+                  <select class="form-select rounded-0" id="pickupStoreSelect">
+                    <option value="">Selecciona una tienda oficial Desknova...</option>
+                    <option value="Desknova Flagship — Calle 85 # 11-53, Zona Rosa (Bogotá)">Desknova Flagship — Calle 85 # 11-53, Zona Rosa (Bogotá) [Lun-Sáb 10am - 8pm]</option>
+                    <option value="Desknova Studio — Cra 43A # 6 Sur-15, El Poblado (Medellín)">Desknova Studio — Cra 43A # 6 Sur-15, El Poblado (Medellín) [Lun-Sáb 10am - 7pm]</option>
+                    <option value="Desknova Space — Av. 9N # 14N-22, Granada (Cali)">Desknova Space — Av. 9N # 14N-22, Granada (Cali) [Lun-Sáb 10am - 7pm]</option>
+                    <option value="Desknova Showroom — Calle 52 # 31-40, Cabecera (Bucaramanga)">Desknova Showroom — Calle 52 # 31-40, Cabecera (Bucaramanga) [Lun-Sáb 9am - 6pm]</option>
+                  </select>
+                  <div class="invalid-feedback">Selecciona una sucursal para la recogida.</div>
+                </div>
+
+                <div class="d-flex justify-content-end pt-3 border-top border-light">
+                  <button type="button" class="btn btn-dark rounded-0 px-4 py-2 text-uppercase fw-bold" onclick="CheckoutModule.goToStep(2);" style="font-size: 0.82rem; letter-spacing: 0.08em;">
+                    Continuar al Paso 2: Contacto <i class="bi bi-arrow-right ms-1"></i>
+                  </button>
+                </div>
+              </div>
+
+              <!-- ── PARTE 2 DE 3: INFORMACIÓN DE CONTACTO Y FACTURACIÓN ── -->
+              <div id="checkoutStepPane2" class="checkout-step-pane d-none">
+                <div class="d-flex align-items-center justify-content-between mb-3 pb-2 border-bottom border-light">
+                  <h3 class="filter-section-title mb-0 fs-6">Paso 2 de 3: Información de Contacto y Facturación</h3>
+                  <span class="badge bg-light text-dark border">Paso 2</span>
+                </div>
+                <p class="text-muted fw-normal mb-3" style="font-size: 0.82rem;">
+                  Ingresa tus datos personales para la emisión de la factura y las notificaciones de despacho.
+                </p>
+
+                <div class="row g-3 mb-4">
+                  <div class="col-md-6">
+                    <label for="buyerName" class="form-label text-secondary" style="font-size: 0.82rem;">Nombre y Apellidos *</label>
+                    <input type="text" class="form-control rounded-0" id="buyerName" placeholder="Tu nombre y apellido" required />
+                    <div class="invalid-feedback">El nombre es obligatorio.</div>
+                  </div>
+                  <div class="col-md-6">
+                    <label for="buyerEmail" class="form-label text-secondary" style="font-size: 0.82rem;">Correo Electrónico *</label>
+                    <input type="email" class="form-control rounded-0" id="buyerEmail" placeholder="tucorreo@ejemplo.com" required />
+                    <div class="invalid-feedback">Por favor ingresa un correo válido.</div>
+                  </div>
+                  <div class="col-md-6">
+                    <label for="buyerPhone" class="form-label text-secondary" style="font-size: 0.82rem;">Teléfono Móvil *</label>
+                    <input type="tel" class="form-control rounded-0" id="buyerPhone" placeholder="+57 300 123 4567" required />
+                    <div class="invalid-feedback">El teléfono es obligatorio.</div>
+                  </div>
+                  <div class="col-md-6">
+                    <label for="buyerDoc" class="form-label text-secondary" style="font-size: 0.82rem;">Documento de Identidad (C.C. o NIT) *</label>
+                    <input type="text" class="form-control rounded-0" id="buyerDoc" placeholder="Cédula o NIT para factura" required />
+                    <div class="invalid-feedback">El documento es obligatorio.</div>
+                  </div>
+                </div>
+
+                <div class="d-flex justify-content-between pt-3 border-top border-light">
+                  <button type="button" class="btn btn-outline-dark rounded-0 px-4 py-2 text-uppercase fw-bold" onclick="CheckoutModule.goToStep(1);" style="font-size: 0.82rem;">
+                    <i class="bi bi-arrow-left me-1"></i> Volver a Entrega
+                  </button>
+                  <button type="button" class="btn btn-dark rounded-0 px-4 py-2 text-uppercase fw-bold" onclick="CheckoutModule.goToStep(3);" style="font-size: 0.82rem; letter-spacing: 0.08em;">
+                    Continuar al Paso 3: Pago <i class="bi bi-arrow-right ms-1"></i>
+                  </button>
+                </div>
+              </div>
+
+              <!-- ── PARTE 3 DE 3: MÉTODO DE PAGO Y CONFIRMACIÓN FINAL ── -->
+              <div id="checkoutStepPane3" class="checkout-step-pane d-none">
+                <div class="d-flex align-items-center justify-content-between mb-3 pb-2 border-bottom border-light">
+                  <h3 class="filter-section-title mb-0 fs-6">Paso 3 de 3: Selección de Método de Pago</h3>
+                  <span class="badge bg-light text-dark border">Paso 3</span>
+                </div>
+                <p class="text-muted fw-normal mb-3" style="font-size: 0.82rem;">
+                  Simulación de pasarela de pago segura con encriptación SSL de 256 bits.
+                </p>
+
+                <!-- Selectores de Método de Pago -->
+                <div class="row g-2 mb-3">
+                  <div class="col-md-4">
+                    <label class="payment-method-pill w-100 active" id="payMethodCardLabel" for="payMethodCard">
+                      <input class="form-check-input mt-0" type="radio" name="paymentOption" id="payMethodCard" value="card" checked />
+                      <span class="fw-bold" style="font-size: 0.82rem;"><i class="bi bi-credit-card me-1"></i> Tarjeta de Crédito</span>
+                    </label>
+                  </div>
+                  <div class="col-md-4">
+                    <label class="payment-method-pill w-100" id="payMethodPaypalLabel" for="payMethodPaypal">
+                      <input class="form-check-input mt-0" type="radio" name="paymentOption" id="payMethodPaypal" value="paypal" />
+                      <span class="fw-bold" style="font-size: 0.82rem;"><i class="bi bi-paypal me-1"></i> PayPal</span>
+                    </label>
+                  </div>
+                  <div class="col-md-4">
+                    <label class="payment-method-pill w-100" id="payMethodMPLabel" for="payMethodMP">
+                      <input class="form-check-input mt-0" type="radio" name="paymentOption" id="payMethodMP" value="mercadopago" />
+                      <span class="fw-bold" style="font-size: 0.82rem;"><i class="bi bi-wallet2 me-1"></i> Mercado Pago</span>
+                    </label>
+                  </div>
+                </div>
+
+                <!-- Formulario UI para Tarjeta de Crédito -->
+                <div id="creditCardFormContainer" class="credit-card-preview-box">
+                  <div class="d-flex justify-content-between align-items-center mb-3">
+                    <div>
+                      <span class="eyebrow text-dark d-block">Detalles de la Tarjeta</span>
+                      <span class="text-muted" style="font-size: 0.78rem;"><i class="bi bi-shield-check me-1"></i> Simulación Segura</span>
+                    </div>
+                    <button type="button" class="btn btn-outline-dark btn-sm rounded-0 px-2 py-1 text-uppercase fw-bold" id="fillDemoCardBtn" style="font-size: 0.72rem; letter-spacing: 0.04em;">
+                      <i class="bi bi-magic me-1"></i> Tarjeta de Prueba
+                    </button>
+                  </div>
+                  <div class="row g-3">
+                    <div class="col-md-12">
+                      <label for="cardHolderName" class="form-label text-secondary" style="font-size: 0.82rem;">Nombre del Titular (como aparece en el plástico) *</label>
+                      <input type="text" class="form-control rounded-0" id="cardHolderName" placeholder="EJ: ANDRES CASTILLO" required />
+                      <div class="invalid-feedback">Por favor ingresa el nombre del titular.</div>
+                    </div>
+                    <div class="col-md-12">
+                      <label for="cardNumberInput" class="form-label text-secondary" style="font-size: 0.82rem;">Número de Tarjeta *</label>
+                      <div class="input-group">
+                        <span class="input-group-text border-end-0 rounded-0" style="background-color: var(--bg-card-media);"><i class="bi bi-credit-card"></i></span>
+                        <input type="text" class="form-control rounded-0 border-start-0" id="cardNumberInput" placeholder="4532 8920 1204 8892" maxlength="19" required />
+                        <div class="invalid-feedback">Ingresa los 16 dígitos de la tarjeta.</div>
+                      </div>
+                    </div>
+                    <div class="col-md-6">
+                      <label for="cardExpiryInput" class="form-label text-secondary" style="font-size: 0.82rem;">Fecha de Vencimiento *</label>
+                      <input type="text" class="form-control rounded-0" id="cardExpiryInput" placeholder="MM/AA (ej: 08/28)" maxlength="5" required />
+                      <div class="invalid-feedback">Ingresa la fecha de vencimiento (MM/AA).</div>
+                    </div>
+                    <div class="col-md-6">
+                      <label for="cardCvvInput" class="form-label text-secondary" style="font-size: 0.82rem;">Código de Seguridad (CVV) *</label>
+                      <input type="password" class="form-control rounded-0" id="cardCvvInput" placeholder="3 o 4 dígitos" maxlength="4" required />
+                      <div class="invalid-feedback">Ingresa el código CVV.</div>
+                    </div>
+                  </div>
+                </div>
+
+                <!-- Aviso para PayPal -->
+                <div id="paypalNoticeContainer" class="p-4 border border-light text-center d-none" style="background-color: var(--bg-subtle);">
+                  <i class="bi bi-paypal text-dark fs-2 mb-2 d-block"></i>
+                  <span class="fw-bold d-block text-dark">Conexión Segura con PayPal</span>
+                  <p class="text-secondary fw-normal mb-0" style="font-size: 0.85rem;">Se simulará la autorización inmediata de fondos sin cobro bancario real.</p>
+                </div>
+
+                <!-- Aviso para Mercado Pago -->
+                <div id="mercadopagoNoticeContainer" class="p-4 border border-light text-center d-none" style="background-color: var(--bg-subtle);">
+                  <i class="bi bi-wallet2 text-dark fs-2 mb-2 d-block"></i>
+                  <span class="fw-bold d-block text-dark">Pasarela Integrada Mercado Pago</span>
+                  <p class="text-secondary fw-normal mb-0" style="font-size: 0.85rem;">Se simulará la confirmación directa a través de tu saldo o medio guardado en Mercado Pago.</p>
+                </div>
+
+                <!-- Resumen de Productos de la Orden -->
+                <div class="p-3 mb-4 border border-light" style="background-color: var(--bg-subtle);">
+                  <span class="eyebrow mb-2 d-block">Ítems a despachar:</span>
+                  <div id="checkoutItemsBrief" class="text-secondary fw-normal" style="font-size: 0.85rem; max-height: 110px; overflow-y: auto;"></div>
+                </div>
+
+                <!-- Botones Finales -->
+                <div class="d-flex justify-content-between pt-3 border-top border-light">
+                  <button type="button" class="btn btn-outline-dark rounded-0 px-4 py-2 text-uppercase fw-bold" onclick="CheckoutModule.goToStep(2);" style="font-size: 0.82rem;">
+                    <i class="bi bi-arrow-left me-1"></i> Volver a Contacto
+                  </button>
+                  <button type="submit" class="btn btn-dark rounded-0 px-5 py-2 text-uppercase fw-bold" id="submitOrderBtn" style="font-size: 0.82rem; letter-spacing: 0.08em;">
+                    <i class="bi bi-lock-fill me-1"></i> Confirmar y Finalizar Pedido
+                  </button>
+                </div>
+              </div>
+
+            </form>
+
+          </div>
+
+          <!-- ESTADO 2: CONFIRMACIÓN DE PEDIDO EXITOSO (RF005) -->
+          <div id="checkoutSuccessView" class="d-none py-4 text-center">
+            <div class="mb-3">
+              <i class="bi bi-check-circle text-dark" style="font-size: 4rem;"></i>
+            </div>
+            <p class="eyebrow mb-2">ORDEN CONFIRMADA // PAGO SIMULADO EXITOSO</p>
+            <h2 class="fw-bolder text-dark fs-2 mb-3">¡Gracias por tu pedido en Desknova!</h2>
+            <p class="text-secondary fw-normal mb-4 mx-auto" style="max-width: 500px; font-size: 0.95rem;">
+              Hemos recibido tu orden y procesado el pago simulado de forma exitosa. Ya nos encontramos preparando tus periféricos para despacharlos.
+            </p>
+
+            <div class="p-4 mx-auto mb-4 border border-light text-start" style="max-width: 520px; background-color: var(--bg-subtle);">
+              <div class="d-flex justify-content-between mb-2 pb-2 border-bottom border-light">
+                <span class="text-muted" style="font-size: 0.85rem;">Referencia de Pedido:</span>
+                <span class="fw-bold text-dark font-monospace" id="successOrderRef">#DN-84920</span>
+              </div>
+              <div class="d-flex justify-content-between mb-2 pb-2 border-bottom border-light">
+                <span class="text-muted" style="font-size: 0.85rem;">Comprador:</span>
+                <span class="fw-bold text-dark" id="successBuyerName">—</span>
+              </div>
+              <div class="d-flex justify-content-between mb-2 pb-2 border-bottom border-light">
+                <span class="text-muted" style="font-size: 0.85rem;">Modalidad de Entrega:</span>
+                <span class="fw-bold text-dark" id="successDeliveryType">—</span>
+              </div>
+              <div class="d-flex justify-content-between mb-2 pb-2 border-bottom border-light">
+                <span class="text-muted" style="font-size: 0.85rem;">Destino / Sucursal:</span>
+                <span class="fw-bold text-dark text-end" id="successDestination" style="max-width: 65%;">—</span>
+              </div>
+              <div class="d-flex justify-content-between mb-2 pb-2 border-bottom border-light">
+                <span class="text-muted" style="font-size: 0.85rem;">Método de Pago:</span>
+                <span class="fw-bold text-dark" id="successPaymentMethod">—</span>
+              </div>
+              <div class="d-flex justify-content-between pt-1">
+                <span class="fw-bold text-dark">Total Pagado:</span>
+                <span class="fw-bolder text-dark fs-5" id="successTotalPaid">$0.00</span>
+              </div>
+            </div>
+
+            <p class="text-muted fw-normal mb-4" style="font-size: 0.82rem;">
+              Se ha enviado la confirmación y factura simulada a: <strong id="successBuyerEmail" class="text-dark">—</strong>
+            </p>
+
+            <button type="button" class="btn btn-dark btn-lg rounded-0 px-5 text-uppercase fw-bold" data-bs-dismiss="modal" onclick="Router.navigate('landing');" style="font-size: 0.85rem; letter-spacing: 0.08em;">
+              Volver a la Tienda
+            </button>
+          </div>
+
+        </div>
+
+      </div>
+    </div>
+  </div>
+
+  <!-- TOAST FLOTANTE DE NOTIFICACIONES -->
+  <div class="custom-toast" id="customToast" role="alert" aria-live="assertive" aria-atomic="true">
+    <i class="bi bi-check2 text-white fs-5" id="toastIcon"></i>
+    <span id="toastMessage">Acción completada con éxito.</span>
+  </div>
+
+  <!-- BOTÓN FLOTANTE VOLVER ARRIBA -->
+  <button class="scroll-top-btn d-none" id="scrollTopBtn" onclick="window.scrollTo({ top: 0, behavior: 'smooth' });" aria-label="Volver arriba" title="Subir al inicio">
+    <i class="bi bi-arrow-up"></i>
+  </button>
+
+  <!-- FOOTER MINIMALISTA ESTILO BOUTIQUE -->
+  <footer class="border-top border-light py-5 mt-5" style="background-color: var(--bg-body);">
+    <div class="container-fluid px-lg-5">
+      <div class="row g-4 justify-content-between align-items-center">
+        <div class="col-md-6 text-center text-md-start">
+          <span class="brand-title d-block mb-1">Desk<strong>nova</strong></span>
+          <p class="text-muted fw-normal mb-0" style="font-size: 0.85rem;">
+            Periféricos y herramientas electrónicas para flujos de trabajo contemporáneos. © 2026.
+          </p>
+        </div>
+        <div class="col-md-6 text-center text-md-end">
+          <ul class="list-inline mb-0">
+            <li class="list-inline-item me-3"><a href="#" class="text-secondary text-decoration-none" style="font-size: 0.85rem;">Privacidad</a></li>
+            <li class="list-inline-item me-3"><a href="#" class="text-secondary text-decoration-none" style="font-size: 0.85rem;">Términos</a></li>
+            <li class="list-inline-item"><a href="#" class="text-secondary text-decoration-none" style="font-size: 0.85rem;">Garantía Técnica</a></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Bootstrap 5.3.3 JS Bundle -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+
+  <!-- Aplicación Principal Vanilla JS -->
+  <script src="app.js"></script>
 </body>
 </html>
